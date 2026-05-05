@@ -51,7 +51,7 @@ const HeroSection = () => {
               />
 
               {/* Floating Tags - Hidden on very small screens, resized for medium */}
-              <div className="absolute top-[15%] -left-4 md:-left-8 bg-white px-3 py-1.5 md:px-5 md:py-2.5 rounded-full shadow-xl border border-gray-100 animate-bounce hidden sm:block">
+              <div className="absolute top-[15%] -left-4 md:-left-8 bg-white px-3 py-1.5 md:px-5 md:py-2.5 rounded-full shadow-xl border border-gray-100 hidden sm:block">
                 <span className="text-xs md:text-sm font-bold text-black">
                   Corporate cleaning
                 </span>
