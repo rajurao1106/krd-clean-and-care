@@ -53,10 +53,10 @@ const Navbar = () => {
             <button aria-label="Search" className="text-gray-600 hover:text-[#0056B3]">
               <Search size={20} />
             </button>
-            <div className="flex items-center text-gray-600">
+            <a href='tel:911234567890' className="flex items-center text-gray-600">
               <Phone size={18} className="mr-2" />
               <span className="text-sm font-medium">Contact</span>
-            </div>
+            </a>
             <button className="bg-[#0056B3] text-white px-5 py-2.5 rounded-md text-sm font-semibold shadow-sm hover:bg-blue-700 transition-all">
               Get a Quote
             </button>
