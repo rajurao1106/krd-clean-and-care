@@ -57,7 +57,7 @@ export default function AboutSection() {
             <span className="text-gray-900">Clean Without Compromise</span>
           </h2>
 
-          <p className="text-gray-600 leading-relaxed text-sm md:text-base max-w-xl">
+          <p className="text-gray-600 font-[poppins] leading-relaxed text-sm md:text-base max-w-xl">
             KRD Clean knows the real value of being reliable and sustainable in
             business—that is the essence of these products. Our cleaning range
             offers deep and lasting cleaning to clean every corner of your
@@ -74,12 +74,12 @@ export default function AboutSection() {
                   width={30}
                   height={30}
                   alt="Home Icon"
-                  className="group-hover:invert transition-all"
+                  className=" transition-all"
                 />
               </div>
               <div>
-                <h4 className="text-lg md:text-xl font-bold text-gray-900">Residential Cleaning</h4>
-                <p className="text-gray-500 text-sm mt-1 max-w-md">
+                <h4 className="text-lg md:text-xl font-bold text-red-500">Residential Cleaning</h4>
+                <p className="text-gray-500 font-[poppins] text-sm mt-1 max-w-md">
                   Achieve your home a cleaner level, essential for residential
                   building, our home-based cleaning range keeps your home neat.
                 </p>
@@ -94,12 +94,12 @@ export default function AboutSection() {
                   width={30}
                   height={30}
                   alt="Building Icon"
-                  className="group-hover:invert transition-all"
+                  className="transition-all"
                 />
               </div>
               <div>
-                <h4 className="text-lg md:text-xl font-bold text-gray-900">Commercial Cleaning</h4>
-                <p className="text-gray-500 text-sm mt-1 max-w-md">
+                <h4 className="text-lg md:text-xl font-bold text-red-500">Commercial Cleaning</h4>
+                <p className="text-gray-500 font-[poppins] text-sm mt-1 max-w-md">
                   Deep clean, chemical-deep, they work better than standard
                   surface cleaners for your commercial workspace.
                 </p>

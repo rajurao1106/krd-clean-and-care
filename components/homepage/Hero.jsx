@@ -12,7 +12,7 @@ const HeroSection = () => {
           <div className="z-10 w-full lg:max-w-2xl text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start gap-2 mb-4">
               <div className="w-1 h-6 bg-red-500 hidden md:block"></div>
-              <p className="text-xs md:text-sm font-semibold uppercase tracking-wider text-red-500">
+              <p className="text-xs md:text-sm font-[poppins] font-semibold uppercase tracking-wider text-red-500">
                 KRD Housekeeping products Clean Meets Convenience
               </p>
             </div>
@@ -21,7 +21,7 @@ const HeroSection = () => {
               India&apos;s <span className="block lg:inline">B2B Cleaning Products Supplier</span>
             </h1>
 
-            <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+            <p className="text-gray-600 font-[poppins] text-base md:text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
               Clean and Care is into the manufacturing of home care, car care, and
               personal care products. Since 2017, these branded products have been
               delivering high-quality cleaning solutions for home, office, and industrial spaces.

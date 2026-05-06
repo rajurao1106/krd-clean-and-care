@@ -81,7 +81,7 @@ export default function FAQSection() {
           <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4 tracking-tight">
             Ask Us Anything
           </h2>
-          <p className="text-gray-500 text-lg">
+          <p className="text-gray-500 font-[poppins] text-lg">
             Have questions? We're here to help you make the eco-friendly switch.
           </p>
         </header>

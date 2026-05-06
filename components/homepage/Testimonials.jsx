@@ -108,7 +108,7 @@ export default function TestimonialSection() {
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
             What Our Clients Say
           </h2>
-          <p className="max-w-3xl mx-auto text-gray-600 leading-relaxed text-base md:text-lg">
+          <p className="max-w-3xl font-[poppins] mx-auto text-gray-600 leading-relaxed text-base md:text-lg">
             At KRD Clean and Care, we believe that the satisfaction of our
             clients is our success. Listen directly to how we make a difference 
             in their everyday lives.
