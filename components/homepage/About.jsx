@@ -109,7 +109,7 @@ export default function AboutSection() {
 
           {/* CTA Button */}
           <div className="pt-6 w-full md:w-auto">
-            <button className="w-full md:w-auto bg-[#0056B3] hover:bg-red-500 text-white font-bold py-4 px-10 rounded-xl shadow-blue-200 shadow-xl hover:shadow-red-200 transition-all duration-300 uppercase text-sm tracking-widest">
+            <button className="w-full md:w-auto bg-[#0056B3] hover:bg-red-500 text-white font-bold py-4 px-10 rounded-md transition-all duration-300 uppercase text-sm tracking-widest">
               More About Us
             </button>
           </div>

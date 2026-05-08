@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'About us', href: '/about' },
+    { name: 'Our Story', href: '/about' },
     { name: 'Products', href: '/products' },
     { name: 'Blog', href: '/blog' },
     { name: 'FAQ', href: '/faq' },
@@ -21,10 +21,9 @@ const Navbar = () => {
     <nav className="fixed bg-white border-b border-gray-100 w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          
           {/* Logo Container */}
           <div className="flex-shrink-0 flex items-center">
-            <Image 
+            <Image
               src="/navbar/logo.png" 
               alt="J.K.D. Enterprises Logo" 
               width={150} 
