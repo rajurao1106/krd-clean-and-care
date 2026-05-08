@@ -1,7 +1,7 @@
 import React from "react";
 import { IoWaterOutline } from "react-icons/io5"; // For Litres
-import { FiPackage } from "react-icons/fi";      // For Products
-import { LuRefreshCw } from "react-icons/lu";     // For Refills (Stable replacement)
+import { FiPackage } from "react-icons/fi"; // For Products
+import { LuRefreshCw } from "react-icons/lu"; // For Refills (Stable replacement)
 import { HiOutlineUsers } from "react-icons/hi2"; // For Families
 
 const stats = [
@@ -42,7 +42,13 @@ const ImpactSection = () => {
         {/* Main Heading */}
         <div className="text-center mb-12 md:mb-20">
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-            It&apos;s not just clean,<br className="sm:hidden" /> it&apos;s <span className="text-[#0056B3]"> <br />KRD Clean And Care</span>
+            It&apos;s not just clean,
+            <br className="sm:hidden" /> it&apos;s{" "}
+            <span className="text-[#0056B3]">
+              {" "}
+              <br />
+              KRD Clean And Care
+            </span>
           </h2>
           <div className="w-24 h-1.5 bg-[#0056B3] mx-auto mt-6 rounded-full" />
         </div>
