@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import hero from "@/public/homepage/hero.png";
+import hero from "@/public/homepage/hero2.png";
 
 const HeroSection = () => {
   return (
@@ -40,12 +40,12 @@ const HeroSection = () => {
           {/* Right Image Side */}
           <div className="relative w-full lg:w-1/2 flex justify-center items-center lg:items-end min-h-[400px] md:min-h-[500px]">
             {/* Main Character Image Container */}
-            <div className="relative z-10 w-full max-w-[350px] md:max-w-[450px] lg:max-w-[550px]">
+            <div className="relative z-10 w-full max-w-[350px] md:max-w-[450px]">
               <Image
                 src={hero}
                 alt="Cleaning Specialist"
-                width={600}
-                height={700}
+                width={1000}
+                height={1000}
                 className="w-full h-auto object-contain"
                 priority
               />
