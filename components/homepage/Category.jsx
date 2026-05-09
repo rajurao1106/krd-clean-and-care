@@ -19,9 +19,7 @@ export default function CategorySection() {
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-10">
-          <h2
-            className="text-3xl md:text-5xl font-bold leading-tight text-gray-900"
-          >
+          <h2 className="text-3xl md:text-5xl font-bold leading-tight text-gray-900">
             Explore our cleaning categories
           </h2>
         </div>

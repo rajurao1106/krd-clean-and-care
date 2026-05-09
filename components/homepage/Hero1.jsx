@@ -19,8 +19,7 @@ export default function GlobalBanner() {
           
           {/* Tagline */}
           <p className="text-white/70 text-[10px] md:text-[11px] uppercase tracking-[2px] font-bold">
-            India&apos;s #1 Home Care
-          </p>
+Clean And Care          </p>
 
           {/* Headline */}
           <h1 className="font-black uppercase leading-[1.1] text-white m-0">

@@ -58,7 +58,7 @@ export default function AboutSection() {
           </h2>
 
           <p className="text-gray-600 font-[poppins] leading-relaxed text-sm md:text-base max-w-xl">
-            KRD Clean knows the real value of being reliable and sustainable in
+            KRD Clean And Care knows the real value of being reliable and sustainable in
             business—that is the essence of these products. Our cleaning range
             offers deep and lasting cleaning to clean every corner of your
             floor, ensuring safety with these cleaning solutions.
