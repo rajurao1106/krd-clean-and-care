@@ -1,5 +1,5 @@
 // components/GlobalBanner.jsx
-import hero1 from "@/public/homepage/hero1.png"
+import hero1 from "@/public/homepage/hero1.png";
 import Image from "next/image";
 
 export default function GlobalBanner() {
@@ -16,15 +16,15 @@ export default function GlobalBanner() {
       <div className="relative z-10 flex w-full items-center justify-center container mx-auto px-4">
         {/* Center content */}
         <div className="flex flex-1 flex-col items-center text-center justify-center gap-4 py-12 md:py-20">
-          
           {/* Tagline */}
           <p className="text-white/70 text-[10px] md:text-[11px] uppercase tracking-[2px] font-bold">
-Clean And Care          </p>
+            KRD Clean And Care{" "}
+          </p>
 
           {/* Headline */}
           <h1 className="font-black uppercase leading-[1.1] text-white m-0">
             <span className="block text-3xl sm:text-4xl md:text-5xl ">
-                Power Up Your
+              Power Up Your
             </span>
             <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-yellow-400 drop-shadow-sm">
               Clean Home!
@@ -35,8 +35,8 @@ Clean And Care          </p>
           <div className="flex justify-center w-full max-w-[300px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[850px] transition-all duration-500">
             <Image
               src={hero1}
-              alt="Global Cleaning Products" 
-              priority 
+              alt="Global Cleaning Products"
+              priority
               placeholder="blur" // Optional: if you want a smooth load
               className="w-full h-auto drop-shadow-2xl object-contain"
             />
@@ -55,7 +55,16 @@ Clean And Care          </p>
 
 function CartIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-4 h-4 md:w-5 md:h-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <circle cx="9" cy="21" r="1" />
       <circle cx="20" cy="21" r="1" />
       <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
