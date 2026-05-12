@@ -15,10 +15,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/' },
-    { name: 'Products', href: '/' },
-    { name: 'FAQ', href: '/' },
-    { name: 'Contact us', href: '/' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Products', href: '/products' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Contact us', href: '/contact' },
   ];
 
   const handleSearchSubmit = (e) => {

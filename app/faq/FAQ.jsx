@@ -3,33 +3,31 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
+import faq from "@/public/faq/faq.png"
 
 const FAQPage = () => {
   const [openIndex, setOpenIndex] = useState(0);
 
   const faqs = [
     {
-      question: "Who should buy cleaning supplies in bulk from JKD Enterprises?",
-      answer: "Hotels, hospitals, corporate offices, manufacturing units, educational institutions, and cleaning contractors should buy cleaning supplies in bulk from JKD Enterprises to maintain consistent cleaning quality and manage budgets efficiently.",
+      question: "Are your cleaning products herbal?",
+      answer: "Yes, we offer a range of herbal-based products, including our popular Neem and Lemon Grass cleaners.",
     },
     {
-      question: "What industrial cleaning supplies does JKD Enterprises provide?",
-      answer: "We provide a wide range of industrial cleaners including degreasers, floor care products, and specialized chemical solutions.",
+      question: "Where is your manufacturing unit located?",
+      answer: "We operate from the Mandhar and Amaseoni Industrial Areas in Raipur, Chhattisgarh.",
     },
     {
-      question: "How can I place an order with JKD Enterprises?",
-      answer: "You can place an order directly through our website, via email, or by contacting our sales team via phone.",
+      question: "Do you offer bulk B2B pricing?",
+      answer: "Absolutely. As a registered Private Limited manufacturer, we specialize in high-volume supply for retail and industrial sectors.",
     },
-    {
-      question: "Do you provide delivery services at JKD Enterprises?",
-      answer: "Yes, we offer reliable delivery services across all regions we serve, ensuring your supplies arrive on schedule.",
-    },
+   
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen  font-sans">
       {/* Header Section */}
-      <header className="relative bg-[#f1f8e9] pt-16 pb-32 overflow-hidden">
+      <header className="relative bg-[#e9f3f8] pt-16 pb-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 z-10">
             <h1 className="text-5xl font-bold text-slate-900 leading-tight">
@@ -42,9 +40,9 @@ const FAQPage = () => {
           </div>
           <div className="md:w-1/2 relative mt-10 md:mt-0 flex justify-end">
             {/* Replace with your actual image path */}
-            <div className="relative w-[400px] h-[300px]">
+            <div className="relative w-[800px] h-[400px]">
                <Image 
-                src="/faq-team.png" 
+                src={faq}
                 alt="Support Team" 
                 fill 
                 className="object-contain"
@@ -64,7 +62,7 @@ const FAQPage = () => {
       <main className="max-w-7xl mx-auto px-6 -mt-16 pb-20 flex flex-col lg:flex-row gap-12">
         
         {/* Left: Accordion Section */}
-        <div className="lg:w-2/3">
+        <div className="lg:w-2/3 pt-20">
           <h2 className="text-3xl font-bold text-slate-900 mb-2">Quick Answers</h2>
           <p className="text-gray-500 mb-8">Find helpful answers to the most frequently asked questions about our products, ordering process, and services.</p>
           

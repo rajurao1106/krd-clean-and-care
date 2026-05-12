@@ -1,34 +1,34 @@
 import React from 'react';
-import { Bed, Brush, DoorOpen, SprayCan } from 'lucide-react';
+import { Factory, Home, Building2, Leaf } from 'lucide-react';
 
 const Services = () => {
   const services = [
     {
       id: "01",
-      title: "Mattress Cleaning",
-      desc: "Professional mattress cleaning that removes dirt, ensuring a fresh environment.",
-      icon: <Bed className="w-8 h-8 text-white" />,
+      title: "Industrial Sanitation",
+      desc: "High-performance cleaners designed for factories, manufacturing units, and large industrial facilities.",
+      icon: <Factory className="w-8 h-8 text-white" />,
       column: "left"
     },
     {
       id: "02",
-      title: "Cleaning Walls",
-      desc: "Restore the freshness of your space with our expert wall cleaning service.",
-      icon: <Brush className="w-8 h-8 text-white" />,
+      title: "Domestic Hygiene",
+      desc: "Premium floor cleaners, toilet cleaners, and hand washes for everyday household use under the Vis Clean brand.",
+      icon: <Home className="w-8 h-8 text-white" />,
       column: "left"
     },
     {
       id: "03",
-      title: "Entryway Cleaning",
-      desc: "Keep your entryway welcoming and pristine with our thorough cleaning service.",
-      icon: <DoorOpen className="w-8 h-8 text-white" />,
+      title: "Bulk Institutional Supply",
+      desc: "Tailored supply chains for hospitals, schools, and corporate offices requiring high-volume hygiene solutions.",
+      icon: <Building2 className="w-8 h-8 text-white" />,
       column: "right"
     },
     {
       id: "04",
-      title: "Baseboard Cleaning",
-      desc: "Revitalize your home with our detailed baseboard cleaning for a polished look.",
-      icon: <SprayCan className="w-8 h-8 text-white" />,
+      title: "Eco-Conscious Formulations",
+      desc: "Developing herbal and environmentally safe cleaning agents for a greener future.",
+      icon: <Leaf className="w-8 h-8 text-white" />,
       column: "right"
     }
   ];
@@ -60,7 +60,7 @@ const Services = () => {
         </h2>
         <div className="flex items-center gap-4">
           <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">
-            Our Services and What We Do
+            Specialized Cleaning Product Supply
           </span>
           <div className="h-[1px] flex-grow bg-gray-100"></div>
         </div>
@@ -80,7 +80,7 @@ const Services = () => {
         <div className="relative rounded-xl overflow-hidden min-h-[500px] bg-[#f0f7ff] flex items-end justify-center">
           <div className="absolute top-1/4 inset-x-0 text-center z-0">
              <span className="text-6xl font-black text-blue-500 opacity-20 whitespace-nowrap">
-              Service All Services
+               Vis Clean
              </span>
           </div>
           <img 

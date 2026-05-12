@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Truck } from 'lucide-react';
+import { MapPin, Phone, Mail, Truck, Globe } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -23,7 +23,7 @@ const Contact = () => {
             </button>
           </form>
 
-          {/* Contact Information Card */}
+          {/* Contact Information Card - Updated with IndiaMART Profile Details */}
           <div className="bg-[#FFFFFF] border border-gray-100 shadow-[0px_20px_50px_rgba(0,86,179,0.1)] rounded-2xl p-8 h-fit">
             <h3 className="text-2xl font-bold mb-8 text-[#000000]">Contact <span className="text-[#0056B3]">Information:</span></h3>
             
@@ -34,7 +34,10 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg text-[#000000]">Our Location:</h4>
-                  <p className="text-[#000000] opacity-70">Unit No. A4, Nandkishore Industrial Estate, Mumbai 400093.</p>
+                  <p className="text-[#000000] opacity-70">
+                    Industrial Area Amaseoni, Khasra No. 232/1 Part, <br />
+                    Raipur, Chhattisgarh, 492001, India
+                  </p>
                 </div>
               </div>
 
@@ -44,17 +47,24 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg text-[#000000]">Call Us Now:</h4>
-                  <p className="text-[#000000] opacity-70">+91 7710090505</p>
+                  <p className="text-[#000000] opacity-70">08048966524</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
                 <div className="bg-[#E1F5FE] p-3 rounded-full h-fit text-[#0056B3]">
-                  <Mail size={24} />
+                  <Globe size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg text-[#000000]">Email Us:</h4>
-                  <p className="text-[#000000] opacity-70">info@example.com</p>
+                  <h4 className="font-bold text-lg text-[#000000]">Official Marketplace:</h4>
+                  <a 
+                    href="https://krd-clean-and-care.in/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-[#0056B3] hover:underline"
+                  >
+                    indiamart.com/krdcleancare
+                  </a>
                 </div>
               </div>
             </div>
@@ -63,8 +73,8 @@ const Contact = () => {
             <div className="mt-12 bg-[#00b189] text-white p-6 rounded-xl flex items-center gap-4">
               <Truck size={32} className="flex-shrink-0" />
               <div>
-                <h4 className="font-bold text-lg">Looking Bulk Orders?</h4>
-                <p className="text-sm opacity-90 font-medium">Contact us for special pricing on large procurements!</p>
+                <h4 className="font-bold text-lg">Looking for Bulk Orders?</h4>
+                <p className="text-sm opacity-90 font-medium">As a leading manufacturer, we offer special B2B pricing on large procurements.</p>
               </div>
             </div>
           </div>
@@ -76,7 +86,7 @@ const Contact = () => {
         <iframe 
           title="Location Map"
           className="w-full h-full grayscale"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1!2d0!3d0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM!5e0!3m2!1sen!2sin!4v1"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.544837549117!2d81.7061793!3d21.2498704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a28dd0409f0f9c5%3A0x633b497f6c348555!2sAmaseoni%2C%20Raipur%2C%20Chhattisgarh!5e0!3m2!1sen!2sin!4v1715510000000!5m2!1sen!2sin"
           loading="lazy"
         ></iframe>
       </section>
