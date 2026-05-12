@@ -8,7 +8,6 @@ export default function AboutSection() {
   return (
     <section className="relative bg-white py-12 md:py-24 px-6 lg:px-12 overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        
         {/* Left Side: Image Composition */}
         <div className="relative flex items-center justify-center min-h-[450px] md:min-h-[600px] lg:min-h-[700px]">
           {/* Main Large Oval Image */}
@@ -34,8 +33,6 @@ export default function AboutSection() {
             />
           </div>
 
-        
-
           {/* Decorative Background Element */}
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-50 rounded-full -z-10 blur-3xl opacity-60"></div>
         </div>
@@ -52,10 +49,8 @@ export default function AboutSection() {
           </h2>
 
           <p className="text-gray-600 font-[poppins] leading-relaxed text-sm md:text-base max-w-xl">
-            KRD Clean And Care knows the real value of being reliable and sustainable in
-            business—that is the essence of these products. Our cleaning range
-            offers deep and lasting cleaning to clean every corner of your
-            floor, ensuring safety with these cleaning solutions.
+            Established in 2021, KRD Clean and Care Private Limited combines
+            modern chemical engineering with eco-friendly ingredients.
           </p>
 
           {/* Feature List */}
@@ -72,10 +67,11 @@ export default function AboutSection() {
                 />
               </div>
               <div>
-                <h4 className="text-lg md:text-xl font-bold text-red-500">Residential Cleaning</h4>
+                <h4 className="text-lg md:text-xl font-bold text-red-500">
+                  Eco-Friendly Efficiency
+                </h4>
                 <p className="text-gray-500 font-[poppins] text-sm mt-1 max-w-md">
-                  Achieve your home a cleaner level, essential for residential
-                  building, our home-based cleaning range keeps your home neat.
+                  Safe, non-toxic formulations under the Vis Clean brand.
                 </p>
               </div>
             </div>
@@ -92,10 +88,12 @@ export default function AboutSection() {
                 />
               </div>
               <div>
-                <h4 className="text-lg md:text-xl font-bold text-red-500">Commercial Cleaning</h4>
+                <h4 className="text-lg md:text-xl font-bold text-red-500">
+                  Proven Quality
+                </h4>
                 <p className="text-gray-500 font-[poppins] text-sm mt-1 max-w-md">
-                  Deep clean, chemical-deep, they work better than standard
-                  surface cleaners for your commercial workspace.
+                  Trusted by industries across Chhattisgarh for high-performance
+                  sanitation.
                 </p>
               </div>
             </div>
@@ -113,7 +111,11 @@ export default function AboutSection() {
       {/* Subtle Bottom Wave Overlay */}
       <div className="absolute bottom-0 left-0 w-full opacity-5 pointer-events-none">
         <svg viewBox="0 0 1440 320" className="w-full h-auto">
-          <path fill="#0056B3" fillOpacity="1" d="M0,224L80,213.3C160,203,320,181,480,181.3C640,181,800,203,960,208C1120,213,1280,203,1360,197.3L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+          <path
+            fill="#0056B3"
+            fillOpacity="1"
+            d="M0,224L80,213.3C160,203,320,181,480,181.3C640,181,800,203,960,208C1120,213,1280,203,1360,197.3L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+          ></path>
         </svg>
       </div>
     </section>

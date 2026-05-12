@@ -3,7 +3,7 @@ import CategorySection from "@/components/homepage/Category";
 import FAQSection from "@/components/homepage/FAQ";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/homepage/Hero";
-import GlobalBanner from "@/components/homepage/Hero1";
+import GlobalBanner from "@/components/homepage/Banner";
 import ImpactSection from "@/components/homepage/Stats";
 import TestimonialSection from "@/components/homepage/Testimonials";
 import Navbar from "@/components/layout/Navbar";

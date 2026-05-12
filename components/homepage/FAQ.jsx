@@ -5,29 +5,19 @@ import { Plus, Minus } from "lucide-react";
 
 const faqData = [
   {
-    question: "What makes KRD products eco-friendly?",
+    question: "Are your cleaning products herbal?",
     answer:
-      "KRD products are powered by plant-based ingredients, making them biodegradable and free from harsh chemicals like phosphates and parabens.",
+      "Yes, we offer a range of herbal-based products, including our popular Neem and Lemon Grass cleaners.",
   },
   {
-    question: "Are KRD products safe for children and pets?",
+    question: "Where is your manufacturing unit located?",
     answer:
-      "Yes, our formulations are non-toxic and designed to be safe for use around your entire family, including little ones and furry friends.",
+      "We operate from the Mandhar and Amaseoni Industrial Areas in Raipur, Chhattisgarh.",
   },
   {
-    question: "How does using KRD products make a difference?",
+    question: "Do you offer bulk B2B pricing?",
     answer:
-      "By choosing KRD, you reduce plastic waste through our refill systems and prevent toxic runoff from entering our water systems.",
-  },
-  {
-    question: "How effective are KRD products compared to conventional brands?",
-    answer:
-      "Our products undergo rigorous testing to ensure they match or exceed the cleaning power of traditional brands without the chemical smell.",
-  },
-  {
-    question: "Can I use KRD products on delicate surfaces?",
-    answer:
-      "Most of our products are pH-balanced and safe for various surfaces. We always recommend a small spot test first for specialized materials.",
+      "Absolutely. As a registered Private Limited manufacturer, we specialize in high-volume supply for retail and industrial sectors.",
   },
 ];
 
