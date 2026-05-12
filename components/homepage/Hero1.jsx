@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function GlobalBanner() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#0D47A1] flex items-center min-h-[500px] md:min-h-[600px]">
+    <section className="relative w-full font-[Lato] overflow-hidden bg-[#0D47A1] flex items-center min-h-[500px] md:min-h-[600px]">
       {/* Background radial glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,_#1976D2_0%,_#0D47A1_60%,_#0A2E6E_100%)]" />
 
@@ -17,7 +17,7 @@ export default function GlobalBanner() {
         {/* Center content */}
         <div className="flex flex-1 flex-col items-center text-center justify-center gap-4 py-12 md:py-20">
           {/* Tagline */}
-          <p className="text-white/70 text-[10px] md:text-[11px] uppercase tracking-[2px] font-bold">
+          <p className="text-white/70  text-[10px] md:text-[11px] uppercase tracking-[2px] font-bold">
             KRD Clean And Care{" "}
           </p>
 

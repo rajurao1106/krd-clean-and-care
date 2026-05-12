@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import hero from "@/public/homepage/hero2.png";
+import hero from "@/public/homepage/hero3.png";
 
 const HeroSection = () => {
   return (
@@ -17,7 +17,7 @@ const HeroSection = () => {
               </p>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-7xl text-[#0056B3] font-semibold leading-[1.1] mb-6">
+            <h1 className="text-4xl md:text-5xl font-[Lato] lg:text-7xl text-[#0056B3] font-semibold leading-[1.1] mb-6">
               India&apos;s <span className="block lg:inline">B2B Cleaning Products Supplier</span>
             </h1>
 
@@ -40,7 +40,7 @@ const HeroSection = () => {
           {/* Right Image Side */}
           <div className="relative w-full lg:w-1/2 flex justify-center items-center lg:items-end min-h-[400px] md:min-h-[500px]">
             {/* Main Character Image Container */}
-            <div className="relative z-10 w-full max-w-[350px] md:max-w-[450px]">
+            <div className="relative z-10 w-full">
               <Image
                 src={hero}
                 alt="Cleaning Specialist"
@@ -65,7 +65,7 @@ const HeroSection = () => {
             </div>
 
             {/* Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-green-200/40 rounded-full blur-3xl -z-0"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-blue-200/40 rounded-full blur-3xl -z-0"></div>
           </div>
           
         </div>

@@ -34,13 +34,7 @@ export default function AboutSection() {
             />
           </div>
 
-          {/* Experience Circle - Repositioned for mobile visibility */}
-          <div className="absolute top-0 right-0 sm:right-10 md:right-12 w-28 h-28 md:w-40 md:h-40 bg-[#0056B3] rounded-full flex flex-col items-center justify-center text-white text-center border-8 border-white shadow-lg z-30">
-            <span className="text-2xl md:text-4xl font-black leading-none">25+</span>
-            <span className="text-[9px] md:text-xs uppercase font-bold tracking-tighter md:tracking-wider mt-1">
-              Years of <br /> Experience
-            </span>
-          </div>
+        
 
           {/* Decorative Background Element */}
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-50 rounded-full -z-10 blur-3xl opacity-60"></div>
@@ -52,7 +46,7 @@ export default function AboutSection() {
             Who We Are
           </div> */}
 
-          <h2 className="text-3xl md:text-5xl font-semibold text-[#0056B3] leading-[1.1]">
+          <h2 className="text-3xl font-[Lato] md:text-5xl font-semibold text-[#0056B3] leading-[1.1]">
             Housekeeping Products <br className="hidden md:block" />
             <span className="text-gray-900">Clean Without Compromise</span>
           </h2>

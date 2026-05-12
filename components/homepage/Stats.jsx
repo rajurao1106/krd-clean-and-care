@@ -41,7 +41,7 @@ const ImpactSection = () => {
       <div className="max-w-7xl mx-auto">
         {/* Main Heading */}
         <div className="text-center mb-12 md:mb-20">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+          <h2 className="text-3xl md:text-5xl font-[Lato] lg:text-6xl font-bold text-gray-900 leading-tight">
             It&apos;s not just clean,
             <br className="sm:hidden" /> it&apos;s{" "}
             <span className="text-[#0056B3]">
@@ -50,7 +50,6 @@ const ImpactSection = () => {
               KRD Clean And Care
             </span>
           </h2>
-          <div className="w-24 h-1.5 bg-[#0056B3] mx-auto mt-6 rounded-full" />
         </div>
 
         {/* Stats Grid */}

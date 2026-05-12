@@ -4,6 +4,7 @@ import product2 from "@/public/homepage/product2.jpg";
 import product3 from "@/public/homepage/product3.jpg";
 import product4 from "@/public/homepage/product4.jpg";
 import product5 from "@/public/homepage/product5.jpg";
+import { HiOutlineArrowRight } from "react-icons/hi2";
 
 const categories = [
   { name: "Glass & Multisurface Cleaner", image: product1, isNew: true },
@@ -15,12 +16,16 @@ const categories = [
 
 export default function CategorySection() {
   return (
-    <section className="relative bg-white py-14 px-6 overflow-hidden">
+    <section className="relative bg-white pt-14 px-6 overflow-hidden">
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-10">
-          <h2 className="text-3xl md:text-5xl font-bold leading-tight text-gray-900">
-            Explore our cleaning categories
+          <p className="text-center uppercase text-xl font-semibold">
+            Our Categories
+          </p>
+          <h2 className="text-3xl text-center md:text-5xl font-semibold leading-tight text-gray-900">
+            Explore our{" "}
+            <span className="text-[#0056B3]">cleaning categories</span>
           </h2>
         </div>
 
@@ -29,17 +34,17 @@ export default function CategorySection() {
           {categories.map((cat, i) => (
             <div key={i} className="group cursor-pointer">
               <div
-                className="bg-white border border-gray-100 rounded-2xl
+                className="bg-white  rounded-2xl
                               p-4 flex flex-col items-center gap-3
                               transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]
-                              group-hover:-translate-y-1.5
-                              group-hover:border-[#0056B3]
-                              group-hover:shadow-[0_12px_32px_-8px_rgba(0,86,179,0.2)]"
+                              "
               >
                 {/* Image container */}
                 <div
-                  className="relative w-full aspect-square rounded-xl
-                                bg-gray-50 group-hover:bg-blue-50
+                  className="relative border border-gray-100 w-full shadow-md  group-hover:-translate-y-1.5
+                              group-hover:border-[#0056B3]
+                              group-hover:shadow-[0_12px_32px_-8px_rgba(0,86,179,0.2)] aspect-square rounded-full border
+                                
                                 transition-colors duration-200 overflow-hidden"
                 >
                   <Image
@@ -71,27 +76,17 @@ export default function CategorySection() {
 
                 {/* Arrow — reveals on hover */}
                 <div
-                  className="flex items-center justify-center w-7 h-7
-                                rounded-full border border-gray-200 text-gray-400
-                                opacity-0 translate-y-1
-                                group-hover:opacity-100 group-hover:translate-y-0
-                                transition-all duration-200"
+                  className="flex items-center justify-center gap-2 px-3 py-1.5
+             rounded-full border border-gray-200 text-gray-400
+             opacity-0 translate-y-1
+             group-hover:opacity-100 group-hover:translate-y-0
+             group-hover:text-[#0056B3] group-hover:border-[#0056B3]
+             transition-all duration-300 ease-out"
                 >
-                  <svg
-                    width="13"
-                    height="13"
-                    viewBox="0 0 13 13"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M2.5 6.5h8M7 3.5l3 3-3 3"
-                      stroke="currentColor"
-                      strokeWidth="1.4"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <span className="text-[10px] font-bold uppercase tracking-wider">
+                    View More
+                  </span>
+                  <HiOutlineArrowRight size={14} strokeWidth={3} />
                 </div>
               </div>
             </div>

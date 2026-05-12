@@ -1,0 +1,105 @@
+import React from 'react';
+import { Bed, Brush, DoorOpen, SprayCan } from 'lucide-react';
+
+const Services = () => {
+  const services = [
+    {
+      id: "01",
+      title: "Mattress Cleaning",
+      desc: "Professional mattress cleaning that removes dirt, ensuring a fresh environment.",
+      icon: <Bed className="w-8 h-8 text-white" />,
+      column: "left"
+    },
+    {
+      id: "02",
+      title: "Cleaning Walls",
+      desc: "Restore the freshness of your space with our expert wall cleaning service.",
+      icon: <Brush className="w-8 h-8 text-white" />,
+      column: "left"
+    },
+    {
+      id: "03",
+      title: "Entryway Cleaning",
+      desc: "Keep your entryway welcoming and pristine with our thorough cleaning service.",
+      icon: <DoorOpen className="w-8 h-8 text-white" />,
+      column: "right"
+    },
+    {
+      id: "04",
+      title: "Baseboard Cleaning",
+      desc: "Revitalize your home with our detailed baseboard cleaning for a polished look.",
+      icon: <SprayCan className="w-8 h-8 text-white" />,
+      column: "right"
+    }
+  ];
+
+  const ServiceCard = ({ service }) => (
+    <div className="bg-[#f0f7ff] p-8 rounded-xl relative group hover:shadow-lg transition-all duration-300">
+      <span className="absolute top-4 right-6 text-4xl font-bold text-gray-200 group-hover:text-blue-100 transition-colors">
+        {service.id}
+      </span>
+      <div className="bg-blue-500 w-14 h-14 rounded-full flex items-center justify-center mb-6 shadow-md shadow-blue-200">
+        {service.icon}
+      </div>
+      <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
+      <p className="text-gray-500 text-sm leading-relaxed mb-6">
+        {service.desc}
+      </p>
+      <button className="text-blue-500 font-bold text-xs tracking-widest border-b-2 border-blue-500 pb-1 hover:text-blue-700 hover:border-blue-700 transition-colors">
+        READ MORE
+      </button>
+    </div>
+  );
+
+  return (
+    <section className="py-20 px-6 max-w-7xl mx-auto font-sans">
+      {/* Header */}
+      <div className="mb-16">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">
+          Excellence At The Core Of Our Services
+        </h2>
+        <div className="flex items-center gap-4">
+          <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">
+            Our Services and What We Do
+          </span>
+          <div className="h-[1px] flex-grow bg-gray-100"></div>
+        </div>
+      </div>
+
+      {/* Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        
+        {/* Left Column */}
+        <div className="flex flex-col gap-8">
+          {services.filter(s => s.column === "left").map(service => (
+            <ServiceCard key={service.id} service={service} />
+          ))}
+        </div>
+
+        {/* Center Image Column */}
+        <div className="relative rounded-xl overflow-hidden min-h-[500px] bg-[#f0f7ff] flex items-end justify-center">
+          <div className="absolute top-1/4 inset-x-0 text-center z-0">
+             <span className="text-6xl font-black text-blue-500 opacity-20 whitespace-nowrap">
+              Service All Services
+             </span>
+          </div>
+          <img 
+            src="/cleaner-with-bucket.png" 
+            alt="Professional Cleaner" 
+            className="relative z-10 w-full h-auto object-contain px-4"
+          />
+        </div>
+
+        {/* Right Column */}
+        <div className="flex flex-col gap-8">
+          {services.filter(s => s.column === "right").map(service => (
+            <ServiceCard key={service.id} service={service} />
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default Services;
