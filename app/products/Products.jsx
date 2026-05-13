@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ChevronRight } from "lucide-react";
+import { products } from "@/data/products";
 
 const categories = [
   "All",
@@ -12,104 +13,6 @@ const categories = [
   "Neem All",
   "Phenolic",
   "Toiletry Cleaner",
-];
-
-const products = [
-  {
-    id: 1,
-    title: "Vis Clean Premium Floor Cleaner (Mogra) - 5L",
-    category: "Floor Cleaner",
-    image:
-      "https://placehold.co/300x300/e8f4fd/0056B3?text=Floor+Cleaner\nMogra+5L",
-    color: "#e8f4fd",
-  },
-  {
-    id: 2,
-    title: "Vis Clean R6 Action Toilet Cleaner - Ultra Shine 1L",
-    category: "Toiletry Cleaner",
-    image:
-      "https://placehold.co/300x300/fff3e0/e65100?text=Toilet+Cleaner\nUltra+Shine",
-    color: "#fff3e0",
-  },
-  {
-    id: 3,
-    title: "Vis Clean Herbal Neem & Lemon Floor Cleaner 1L",
-    category: "Neem All",
-    image:
-      "https://placehold.co/300x300/e8f5e9/2e7d32?text=Neem+%26+Lemon\nFloor+Cleaner",
-    color: "#e8f5e9",
-  },
-  {
-    id: 4,
-    title: "Vis Clean Premium Floor Cleaner (Rose) - 5L",
-    category: "Floor Cleaner",
-    image:
-      "https://placehold.co/300x300/fce4ec/c62828?text=Floor+Cleaner\nRose+5L",
-    color: "#fce4ec",
-  },
-  {
-    id: 5,
-    title: "Vis Clean Multi-Surface Glass Cleaner - 500ml",
-    category: "Glass & House Cleaner",
-    image:
-      "https://placehold.co/300x300/e3f2fd/0277bd?text=Glass+Cleaner\n500ml",
-    color: "#e3f2fd",
-  },
-  {
-    id: 6,
-    title: "Vis Clean Antibacterial Hand Wash - 250ml",
-    category: "Bathroom Cleaner",
-    image: "https://placehold.co/300x300/f3e5f5/6a1b9a?text=Hand+Wash\n250ml",
-    color: "#f3e5f5",
-  },
-  {
-    id: 7,
-    title: "Vis Clean Dish Wash Gel (Lemon Power) - 1L",
-    category: "Group Products",
-    image:
-      "https://placehold.co/300x300/fffde7/f57f17?text=Dish+Wash+Gel\nLemon+1L",
-    color: "#fffde7",
-  },
-  {
-    id: 8,
-    title: "Vis Clean Industrial Degreaser - 20L",
-    category: "Group Products",
-    image:
-      "https://placehold.co/300x300/eceff1/37474f?text=Industrial\nDegreaser+20L",
-    color: "#eceff1",
-  },
-  {
-    id: 9,
-    title: "Vis Clean Phenyl (Green Neem) - 5L",
-    category: "Phenolic",
-    image:
-      "https://placehold.co/300x300/f1f8e9/558b2f?text=Phenyl\nGreen+Neem+5L",
-    color: "#f1f8e9",
-  },
-  {
-    id: 10,
-    title: "Vis Clean Bathroom Tile Cleaner - 1L",
-    category: "Bathroom Cleaner",
-    image:
-      "https://placehold.co/300x300/e8eaf6/283593?text=Bathroom+Tile\nCleaner+1L",
-    color: "#e8eaf6",
-  },
-  {
-    id: 11,
-    title: "Vis Clean Neem Floor Disinfectant - 2L",
-    category: "Neem All",
-    image:
-      "https://placehold.co/300x300/dcedc8/33691e?text=Neem\nDisinfectant+2L",
-    color: "#dcedc8",
-  },
-  {
-    id: 12,
-    title: "Vis Clean White Phenyl Concentrate - 5L",
-    category: "Phenolic",
-    image:
-      "https://placehold.co/300x300/fafafa/455a64?text=White+Phenyl\nConcentrate+5L",
-    color: "#fafafa",
-  },
 ];
 
 const ProductPage = () => {
@@ -223,7 +126,7 @@ const ProductPage = () => {
                     {/* Product Image */}
                     <div
                       className="aspect-square w-full rounded-lg mb-4 flex items-center justify-center overflow-hidden"
-                      style={{ backgroundColor: product.color }}
+                    
                     >
                       <img
                         src={product.image}
