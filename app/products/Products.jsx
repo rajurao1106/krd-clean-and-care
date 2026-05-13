@@ -26,7 +26,7 @@ const ProductPage = () => {
   return (
     <div
       style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}
-      className="max-w-7xl mx-auto p-6 bg-gray-50 min-h-screen"
+      className="max-w-7xl mx-auto p-6 min-h-screen"
     >
       {/* Header */}
       <div className="mb-6">

@@ -18,7 +18,7 @@ const Contact = () => {
             <input type="email" placeholder="Your Email..." className="w-full bg-[#FFFFFF] border-2 border-gray-100 p-4 rounded-md outline-none focus:border-[#0056B3] text-[#000000]" />
             <textarea rows="4" placeholder="Your Message..." className="w-full bg-[#FFFFFF] border-2 border-gray-100 p-4 rounded-md outline-none focus:border-[#0056B3] text-[#000000]"></textarea>
             
-            <button className="w-full bg-[#00b189] text-white py-4 rounded-md font-bold uppercase tracking-widest hover:bg-opacity-90 transition-all shadow-md">
+            <button className="w-full bg-[#0056B3] text-white py-4 rounded-md font-bold uppercase tracking-widest hover:bg-opacity-90 transition-all shadow-md">
               Submit Message
             </button>
           </form>
@@ -70,7 +70,7 @@ const Contact = () => {
             </div>
 
             {/* Mint Green Bulk Order Section */}
-            <div className="mt-12 bg-[#00b189] text-white p-6 rounded-xl flex items-center gap-4">
+            <div className="mt-12 bg-[#0056B3] text-white p-6 rounded-xl flex items-center gap-4">
               <Truck size={32} className="flex-shrink-0" />
               <div>
                 <h4 className="font-bold text-lg">Looking for Bulk Orders?</h4>
