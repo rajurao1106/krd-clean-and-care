@@ -1,5 +1,7 @@
 import React from 'react';
 import { Factory, Home, Building2, Leaf } from 'lucide-react';
+import about2 from "@/public/about/about2.jpg"
+import Image from 'next/image';
 
 const Services = () => {
   const services = [
@@ -76,17 +78,14 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Center Image Column */}
-        <div className="relative rounded-xl overflow-hidden min-h-[500px] bg-[#f0f7ff] flex items-end justify-center">
-          <div className="absolute top-1/4 inset-x-0 text-center z-0">
-             <span className="text-6xl font-black text-blue-500 opacity-20 whitespace-nowrap">
-               Vis Clean
-             </span>
-          </div>
-          <img 
-            src="/cleaner-with-bucket.png" 
-            alt="Professional Cleaner" 
-            className="relative z-10 w-full h-auto object-contain px-4"
+        {/* Center Image Column - FIXED */}
+        <div className="relative rounded-xl overflow-hidden bg-[#f0f7ff] min-h-[400px] lg:min-h-full">
+          <Image
+            src={about2}
+            alt="Professional Cleaner"
+            fill
+            className="object-cover object-center"
+            placeholder="blur" // Optional: gives a nice loading effect
           />
         </div>
 
