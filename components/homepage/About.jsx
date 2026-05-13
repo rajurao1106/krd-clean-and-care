@@ -6,7 +6,7 @@ import about4 from "@/public/homepage/about4.jpg";
 
 export default function AboutSection() {
   return (
-    <section className="relative bg-white py-12 md:py-24 px-6 lg:px-12 overflow-hidden">
+    <section className="relative bg-white pb-12 px-6 lg:px-12 overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Left Side: Image Composition */}
         <div className="relative flex items-center justify-center min-h-[450px] md:min-h-[600px] lg:min-h-[700px]">

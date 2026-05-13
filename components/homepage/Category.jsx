@@ -16,7 +16,7 @@ const categories = [
 
 export default function CategorySection() {
   return (
-    <section className="relative bg-white pt-14 px-6 overflow-hidden">
+    <section className="relative bg-white px-6 overflow-hidden">
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-10">

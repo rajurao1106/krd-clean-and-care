@@ -4,7 +4,7 @@ import hero from "@/public/homepage/hero3.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full min-h-[auto] lg:min-h-[740px] bg-gradient-to-br from-white via-white to-[#e8f5e9] overflow-hidden flex items-center py-12 lg:py-0">
+    <section className="relative w-full h-screen overflow-hidden flex items-center py-12 lg:py-0">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Left Content Side */}
@@ -12,7 +12,7 @@ const HeroSection = () => {
             <div className="flex items-center justify-center lg:justify-start gap-2 mb-4">
               <div className="w-1 h-6 bg-red-500 hidden md:block"></div>
               <p className="text-xs md:text-sm font-[poppins] font-semibold uppercase tracking-wider text-red-500">
-                KRD Housekeeping products Clean Meets Convenience
+                KRD is Leading business cleaning supplier
               </p>
             </div>
 
@@ -34,7 +34,7 @@ const HeroSection = () => {
                 Shop Now
               </button>
               <button className="w-full sm:w-auto border-2 border-[#0056B3] hover:border-red-500 text-[#0056B3] hover:bg-red-500 hover:text-white font-bold py-4 px-10 rounded-lg transition-all duration-300">
-                Our Profile
+                About Us{" "}
               </button>
             </div>
           </div>

@@ -2,9 +2,9 @@
 
 import React from "react";
 import Slider from "react-slick";
-import { Heart, Maximize2, ShoppingBag } from "lucide-react"; // Using Lucide for icons
+import { Heart, Maximize2, ShoppingBag } from "lucide-react"; 
+// import product1 from "@/public/product/"
 
-// Import slick css in your _app.js or layout.js
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -57,9 +57,9 @@ const Products = () => {
 
   const categories = [
     "All",
-    "Glass & Multisurface Cleaner",
-    "Milky Herbal Floor Cleaner",
-    "Toilet Cleaner",
+    "Glass & Surface",
+    "Floor Cleaners",
+    "Toilet Care",
     "Milky Perfumed Cleaner",
     "Dish Wash Gel",
   ];
@@ -76,7 +76,7 @@ const Products = () => {
             Our <span className="text-[#0056B3]">Best Sellers</span> Products
           </h2>
         </div>
-        <button className="bg-[#0056B3] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-emerald-800 transition">
+        <button className="bg-[#0056B3] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-red-500 transition">
           View All Products
         </button>
       </div>
