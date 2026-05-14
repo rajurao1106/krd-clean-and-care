@@ -1,68 +1,56 @@
 "use client";
 
-import React from "react";
+import React, { useState, useRef } from "react";
 import Slider from "react-slick";
-import { Heart, Maximize2, ShoppingBag } from "lucide-react"; 
-// import product1 from "@/public/product/"
-
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const products = [
-  {
-    id: 1,
-    name: "SilkSculpt Serum",
-    category: "Glass & Multisurface Cleaner",
-    price: 35.0,
-    oldPrice: 70.0,
-    rating: 4.9,
-    discount: "50% off",
-    image: "/serum1.jpg", // Replace with your paths
-    timer: true,
-  },
-  {
-    id: 2,
-    name: "SilkSkin Serum",
-    category: "Toilet Cleaner",
-    price: 48.0,
-    oldPrice: 60.0,
-    rating: 4.8,
-    discount: "20% off",
-    image: "/serum2.jpg",
-  },
-  {
-    id: 3,
-    name: "Argan Glow",
-    category: "Toilet Cleaner",
-    price: 63.0,
-    oldPrice: 90.0,
-    rating: 5.0,
-    discount: "30% off",
-    image: "/argan.jpg",
-  },
-];
+import { products } from "@/data/products";
 
 const Products = () => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 640, settings: { slidesToShow: 1 } },
-    ],
-  };
+  const [activeCategory, setActiveCategory] = useState("All");
+  const sliderRef = useRef(null);
 
   const categories = [
     "All",
-    "Glass & Surface",
-    "Floor Cleaners",
-    "Toilet Care",
-    "Milky Perfumed Cleaner",
-    "Dish Wash Gel",
+    "Floor Cleaner",
+    "Toiletry Cleaner",
+    "Neem All",
+    "Glass & House Cleaner",
+    "Bathroom Cleaner",
+    "Phenolic",
   ];
+
+  const filteredProducts =
+    activeCategory === "All"
+      ? products
+      : products.filter((p) => p.category === activeCategory);
+
+  const settings = {
+    dots: false,
+    arrows: false,
+    infinite: filteredProducts.length > 3,
+    speed: 500,
+    slidesToShow: Math.min(3, filteredProducts.length),
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: Math.min(2, filteredProducts.length),
+          infinite: filteredProducts.length > 2,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          infinite: filteredProducts.length > 1,
+        },
+      },
+    ],
+  };
 
   return (
     <section className="py-12 px-6 max-w-7xl mx-auto font-sans">
@@ -81,13 +69,14 @@ const Products = () => {
         </button>
       </div>
 
-      {/* Category Tabs */}
+      {/* ✅ Category Tabs — yeh pehle remove ho gaya tha */}
       <div className="flex gap-3 overflow-x-auto pb-8 no-scrollbar">
-        {categories.map((cat, i) => (
+        {categories.map((cat) => (
           <button
             key={cat}
+            onClick={() => setActiveCategory(cat)}
             className={`px-5 py-2 rounded-full border text-sm whitespace-nowrap transition ${
-              i === 0
+              activeCategory === cat
                 ? "bg-[#0056B3] text-white border-[#0056B3]"
                 : "bg-white text-gray-600 border-gray-200 hover:border-[#0056B3]"
             }`}
@@ -98,32 +87,50 @@ const Products = () => {
       </div>
 
       {/* Carousel */}
-      <Slider {...settings} className="product-slider">
-        {products.map((product) => (
-          <div key={product.id} className="px-3">
-            <div className="group relative">
-              {/* Image Container */}
-              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gray-100">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
+      <div className="relative">
+        {/* Prev Button */}
+        <button
+          onClick={() => sliderRef.current?.slickPrev()}
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:bg-[#0056B3] hover:text-white hover:border-[#0056B3] transition"
+        >
+          <ChevronLeft size={20} />
+        </button>
 
-              {/* Product Info */}
-              <div className="mt-4">
-                <div className="flex justify-between items-center text-sm text-gray-400 mb-1">
-                  <span>{product.category}</span>
+        {/* Next Button */}
+        <button
+          onClick={() => sliderRef.current?.slickNext()}
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:bg-[#0056B3] hover:text-white hover:border-[#0056B3] transition"
+        >
+          <ChevronRight size={20} />
+        </button>
+
+        <Slider ref={sliderRef} {...settings} className="product-slider">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="px-3">
+              <div className="group relative">
+                <div
+                  className="relative aspect-[4/5] rounded-3xl overflow-hidden"
+                  style={{ backgroundColor: product.color }}
+                >
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">
-                  {product.name}
-                </h3>
+                <div className="mt-4">
+                  <div className="text-sm text-gray-400 mb-1">
+                    <span>{product.category}</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900">
+                    {product.title}
+                  </h3>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
+      </div>
     </section>
   );
 };
