@@ -30,12 +30,12 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <button className="w-full sm:w-auto bg-[#0056B3] hover:bg-red-500 text-white font-bold py-4 px-10 rounded-lg transition-all duration-300 shadow-md">
+              <a href="/contact" className="w-full sm:w-auto bg-[#0056B3] hover:bg-red-500 text-white font-bold py-4 px-10 rounded-lg transition-all duration-300 shadow-md">
                 Shop Now
-              </button>
-              <button className="w-full sm:w-auto border-2 border-[#0056B3] hover:border-red-500 text-[#0056B3] hover:bg-red-500 hover:text-white font-bold py-4 px-10 rounded-lg transition-all duration-300">
+              </a>
+              <a href="/about" className="w-full sm:w-auto border-2 border-[#0056B3] hover:border-red-500 text-[#0056B3] hover:bg-red-500 hover:text-white font-bold py-4 px-10 rounded-lg transition-all duration-300">
                 About Us{" "}
-              </button>
+              </a>
             </div>
           </div>
 

@@ -7,11 +7,11 @@ import product5 from "@/public/homepage/product5.jpg";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 
 const categories = [
-  { name: "Glass & Surface", image: product1, isNew: true },
-  { name: "Floor Cleaners", image: product2, isNew: true },
-  { name: "Toilet Care", image: product3 },
-  { name: "Milky Perfumed Cleaner", image: product4 },
-  { name: "Dish Wash Gel", image: product5 },
+  { name: "Glass & Surface", image: product1, isNew: true, link:"/products" },
+  { name: "Floor Cleaners", image: product2, isNew: true, link:"/products" },
+  { name: "Toilet Care", image: product3, link:"/products" },
+  { name: "Milky Perfumed Cleaner", image: product4, link:"/products" },
+  { name: "Dish Wash Gel", image: product5, link:"/products" },
 ];
 
 export default function CategorySection() {
