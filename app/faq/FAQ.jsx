@@ -32,7 +32,7 @@ const FAQPage = () => {
           <div className="md:w-1/2 z-10">
             <h1 className="text-5xl font-bold text-slate-900 leading-tight">
               Frequently Asked <br />
-              <span className="text-[#8ec63f]">Questions !</span>
+              <span className="text-[#0056B3]">Questions !</span>
             </h1>
             <p className="mt-6 text-gray-600 max-w-md leading-relaxed">
               Got questions? We've got answers! Browse through our FAQs to find quick solutions to common queries about our products, services, and ordering process.
@@ -93,11 +93,11 @@ const FAQPage = () => {
           <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 sticky top-8">
             <h3 className="text-xl font-bold text-slate-900 mb-6">Still Have A Questions?</h3>
             <form className="space-y-4">
-              <input type="text" placeholder="Your First Name... *" className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#8ec63f] outline-none text-sm" />
-              <input type="text" placeholder="Your Last Name... *" className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#8ec63f] outline-none text-sm" />
-              <input type="email" placeholder="Your Email..." className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#8ec63f] outline-none text-sm" />
-              <input type="tel" placeholder="Your Mobile Number... *" className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#8ec63f] outline-none text-sm" />
-              <textarea placeholder="Your Message..." rows={4} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#8ec63f] outline-none text-sm resize-none"></textarea>
+              <input type="text" placeholder="Your First Name... *" className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#0056B3] outline-none text-sm" />
+              <input type="text" placeholder="Your Last Name... *" className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#0056B3] outline-none text-sm" />
+              <input type="email" placeholder="Your Email..." className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#0056B3] outline-none text-sm" />
+              <input type="tel" placeholder="Your Mobile Number... *" className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#0056B3] outline-none text-sm" />
+              <textarea placeholder="Your Message..." rows={4} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#0056B3] outline-none text-sm resize-none"></textarea>
               
               {/* Dummy Captcha Placeholder */}
               <div className="bg-gray-50 border border-gray-200 p-3 rounded flex items-center justify-between text-xs text-gray-500">
@@ -108,7 +108,7 @@ const FAQPage = () => {
                 <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA" className="w-6 h-6 opacity-60" />
               </div>
 
-              <button className="w-full bg-[#8ec63f] text-white font-bold py-3 rounded-lg hover:bg-[#7ab035] transition-colors uppercase text-sm tracking-wide">
+              <button className="w-full bg-[#0056B3] text-white font-bold py-3 rounded-lg hover:bg-[#0056B3] transition-colors uppercase text-sm tracking-wide">
                 Submit Message
               </button>
             </form>

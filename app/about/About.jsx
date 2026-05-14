@@ -1,6 +1,6 @@
 import React from "react";
 import { CheckCircle2 } from "lucide-react";
-import about1 from "@/public/about/about1.jpg";
+import about1 from "@/public/about/about3.jpg";
 import Image from "next/image";
 
 const About = () => {
