@@ -16,7 +16,7 @@ const HeroSection = () => {
               </p>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-[Lato] lg:text-7xl text-[#0056B3] font-semibold leading-[1.1] mb-6">
+            <h1 className="text-4xl md:text-5xl font-[Lato] lg:text-7xl text-[#0056B3] font-bold leading-[1.1] mb-6">
               India&apos;s{" "}
               <span className="block lg:inline">
                 B2B Cleaning Products Supplier

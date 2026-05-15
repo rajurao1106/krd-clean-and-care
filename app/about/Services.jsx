@@ -57,7 +57,7 @@ const Services = () => {
     <section className="py-20 px-6 max-w-7xl mx-auto font-sans">
       {/* Header */}
       <div className="mb-16">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">
+        <h2 className="text-3xl md:text-5xl font-bold font-[lato] text-slate-900 mb-2">
           Excellence At The Core Of Our Services
         </h2>
         <div className="flex items-center gap-4">

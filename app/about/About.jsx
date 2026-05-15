@@ -9,7 +9,7 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-6 py-16 lg:pt-20 flex flex-col lg:flex-row items-center gap-12">
         {/* Left Content Side */}
         <div className="w-full lg:w-1/2 z-10">
-          <h2 className="text-4xl lg:text-6xl font-[Lato] font-bold text-slate-900 leading-tight mb-6">
+          <h2 className="text-4xl lg:text-6xl font-[Lato] font-bold text-[#0056B3] leading-tight mb-6">
             Reliable, Affordable & Eco-Friendly Hygiene Solutions
           </h2>
 
