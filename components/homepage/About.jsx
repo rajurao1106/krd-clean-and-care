@@ -67,7 +67,7 @@ export default function AboutSection() {
                 />
               </div>
               <div>
-                <h4 className="text-lg md:text-xl font-bold text-red-500">
+                <h4 className="text-lg md:text-xl font-bold ">
                   Eco-Friendly Efficiency
                 </h4>
                 <p className="text-gray-500 font-[poppins] text-sm mt-1 max-w-md">
@@ -88,7 +88,7 @@ export default function AboutSection() {
                 />
               </div>
               <div>
-                <h4 className="text-lg md:text-xl font-bold text-red-500">
+                <h4 className="text-lg md:text-xl font-bold">
                   Proven Quality
                 </h4>
                 <p className="text-gray-500 font-[poppins] text-sm mt-1 max-w-md">

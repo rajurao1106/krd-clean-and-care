@@ -1,91 +1,121 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Truck, Globe } from 'lucide-react';
+import { MapPin, Phone, Truck, Globe, Send } from 'lucide-react';
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-[#FFFFFF]">
+    <div className="min-h-screen max-lg:pt-14 bg-white font-sans">
       {/* --- FORM & INFO SECTION --- */}
-      <section className="max-w-7xl mx-auto py-20 px-6">
-        <h2 className="text-3xl font-bold text-[#000000] mb-12">Drop Us A Message</h2>
+      <section className="max-w-7xl mx-auto py-16 md:py-24 px-6">
+        <div className="mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
+            Let&apos;s Start a <span className="text-[#0056B3]">Conversation</span>
+          </h2>
+          <p className="text-gray-500 mt-4 text-lg">Have questions about our manufacturing process or bulk supplies?</p>
+        </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Form */}
-          <form className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input type="text" placeholder="Your First Name... *" className="w-full bg-[#FFFFFF] border-2 border-gray-100 p-4 rounded-md outline-none focus:border-[#0056B3] text-[#000000]" />
-              <input type="text" placeholder="Your Last Name... *" className="w-full bg-[#FFFFFF] border-2 border-gray-100 p-4 rounded-md outline-none focus:border-[#0056B3] text-[#000000]" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* Form - Taking 7 columns */}
+          <form className="lg:col-span-7 space-y-6 bg-gray-50 p-8 rounded-2xl border border-gray-100">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700">First Name *</label>
+                <input type="text" placeholder="John" className="w-full bg-white border border-gray-200 p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#0056B3]/20 focus:border-[#0056B3] transition-all" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-semibold text-slate-700">Last Name *</label>
+                <input type="text" placeholder="Doe" className="w-full bg-white border border-gray-200 p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#0056B3]/20 focus:border-[#0056B3] transition-all" />
+              </div>
             </div>
-            <input type="email" placeholder="Your Email..." className="w-full bg-[#FFFFFF] border-2 border-gray-100 p-4 rounded-md outline-none focus:border-[#0056B3] text-[#000000]" />
-            <textarea rows="4" placeholder="Your Message..." className="w-full bg-[#FFFFFF] border-2 border-gray-100 p-4 rounded-md outline-none focus:border-[#0056B3] text-[#000000]"></textarea>
+
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-slate-700">Email Address</label>
+              <input type="email" placeholder="john@company.com" className="w-full bg-white border border-gray-200 p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#0056B3]/20 focus:border-[#0056B3] transition-all" />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-slate-700">Message</label>
+              <textarea rows="5" placeholder="Tell us about your requirements..." className="w-full bg-white border border-gray-200 p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#0056B3]/20 focus:border-[#0056B3] transition-all resize-none"></textarea>
+            </div>
             
-            <button className="w-full bg-[#0056B3] text-white py-4 rounded-md font-bold uppercase tracking-widest hover:bg-opacity-90 transition-all shadow-md">
+            <button className="flex items-center justify-center gap-3 w-full bg-[#0056B3] text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-100 group">
               Submit Message
+              <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </button>
           </form>
 
-          {/* Contact Information Card - Updated with IndiaMART Profile Details */}
-          <div className="bg-[#FFFFFF] border border-gray-100 shadow-[0px_20px_50px_rgba(0,86,179,0.1)] rounded-2xl p-8 h-fit">
-            <h3 className="text-2xl font-bold mb-8 text-[#000000]">Contact <span className="text-[#0056B3]">Information:</span></h3>
-            
-            <div className="space-y-8">
-              <div className="flex gap-4">
-                <div className="bg-[#E1F5FE] p-3 rounded-full h-fit text-[#0056B3]">
-                  <MapPin size={24} />
+          {/* Contact Information Card - Taking 5 columns */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="bg-white border border-gray-100 shadow-[0px_20px_60px_rgba(0,86,179,0.08)] rounded-3xl p-8 md:p-10">
+              <h3 className="text-2xl font-bold mb-10 text-slate-900 border-b pb-4">
+                Reach Us <span className="text-[#0056B3]">Directly</span>
+              </h3>
+              
+              <div className="space-y-10">
+                <div className="flex gap-5">
+                  <div className="bg-blue-50 h-15 p-4 rounded-2xl text-[#0056B3]">
+                    <MapPin size={26} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg text-slate-900">Our Location</h4>
+                    <p className="text-slate-600 leading-relaxed mt-1">
+                      Industrial Area Amaseoni, Khasra No. 232/1 Part, <br />
+                      Raipur, Chhattisgarh, 492001, India
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-lg text-[#000000]">Our Location:</h4>
-                  <p className="text-[#000000] opacity-70">
-                    Industrial Area Amaseoni, Khasra No. 232/1 Part, <br />
-                    Raipur, Chhattisgarh, 492001, India
-                  </p>
-                </div>
-              </div>
 
-              <div className="flex gap-4">
-                <div className="bg-[#E1F5FE] p-3 rounded-full h-fit text-[#0056B3]">
-                  <Phone size={24} />
+                <div className="flex gap-5">
+                  <div className="bg-blue-50 p-4 rounded-2xl text-[#0056B3]">
+                    <Phone size={26} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg text-slate-900">Call Us</h4>
+                    <p className="text-slate-600 text-xl font-medium mt-1">+91 80489 66524</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-lg text-[#000000]">Call Us Now:</h4>
-                  <p className="text-[#000000] opacity-70">08048966524</p>
-                </div>
-              </div>
 
-              <div className="flex gap-4">
-                <div className="bg-[#E1F5FE] p-3 rounded-full h-fit text-[#0056B3]">
-                  <Globe size={24} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-lg text-[#000000]">Official Marketplace:</h4>
-                  <a 
-                    href="https://krd-clean-and-care.in/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-[#0056B3] hover:underline"
-                  >
-                    indiamart.com/krdcleancare
-                  </a>
+                <div className="flex gap-5">
+                  <div className="bg-blue-50 p-4 rounded-2xl text-[#0056B3]">
+                    <Globe size={26} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg text-slate-900">Marketplace</h4>
+                    <a 
+                      href="https://www.indiamart.com/krdcleancare" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-[#0056B3] hover:underline font-medium text-lg block mt-1"
+                    >
+                      indiamart.com/krdcleancare
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Mint Green Bulk Order Section */}
-            <div className="mt-12 bg-[#0056B3] text-white p-6 rounded-xl flex items-center gap-4">
-              <Truck size={32} className="flex-shrink-0" />
-              <div>
-                <h4 className="font-bold text-lg">Looking for Bulk Orders?</h4>
-                <p className="text-sm opacity-90 font-medium">As a leading manufacturer, we offer special B2B pricing on large procurements.</p>
+            {/* Bulk Order Section - Prominent */}
+            <div className="bg-[#0056B3] text-white p-8 rounded-3xl flex flex-col md:flex-row items-center gap-6 relative overflow-hidden group">
+              <Truck size={60} className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform" />
+              <div className="bg-white/10 p-4 rounded-full">
+                <Truck size={32} />
+              </div>
+              <div className="text-center md:text-left">
+                <h4 className="font-bold text-xl mb-1">Looking for Bulk Orders?</h4>
+                <p className="text-blue-100 opacity-90 text-sm">
+                  Get specialized B2B pricing and custom manufacturing solutions.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="w-full h-[400px] bg-gray-200">
+      {/* Map Section - Full Width with Hover Transition */}
+      <section className="w-full h-[450px] relative group overflow-hidden border-t">
+        <div className="absolute inset-0 bg-slate-900/10 pointer-events-none group-hover:bg-transparent transition-colors duration-500 z-10" />
         <iframe 
           title="Location Map"
-          className="w-full h-full grayscale"
+          className="w-full h-full grayscale-[50%] group-hover:grayscale-0 transition-all duration-700 ease-in-out"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.544837549117!2d81.7061793!3d21.2498704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a28dd0409f0f9c5%3A0x633b497f6c348555!2sAmaseoni%2C%20Raipur%2C%20Chhattisgarh!5e0!3m2!1sen!2sin!4v1715510000000!5m2!1sen!2sin"
           loading="lazy"
         ></iframe>

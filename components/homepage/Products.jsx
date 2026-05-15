@@ -55,7 +55,7 @@ const Products = () => {
   return (
     <section className="py-12 px-6 max-w-7xl mx-auto font-sans">
       {/* Header */}
-      <div className="flex font-[Lato] justify-between items-end mb-8">
+      <div className="flex font-[Lato] max-lg:flex-col justify-between items-end max-lg:items-start max-lg:gap-4 mb-8">
         <div>
           <span className="text-gray-500 text-sm font-medium">
             Our Products

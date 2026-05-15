@@ -94,7 +94,7 @@ const ProductPage = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayProducts.map((product) => (
                 <div key={product.id} className="border border-gray-200 rounded-xl p-4 flex flex-col bg-white hover:shadow-xl transition-shadow">
-                  <div className="aspect-square w-full mb-4 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
+                  <div className="aspect-square w-full mb-4 flex items-center justify-center  rounded-lg overflow-hidden">
                     <img src={product.image} alt={product.title} className="max-h-full object-contain p-4" />
                   </div>
                   <span className="text-[10px] uppercase tracking-widest font-bold text-[#0056B3] bg-[#e8f1fb] px-2 py-1 rounded mb-2 self-start">
