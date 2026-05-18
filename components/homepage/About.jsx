@@ -86,7 +86,7 @@ export default function AboutSection() {
                   alt="Building Icon"
                   className="transition-all"
                 />
-              </div>
+              </div> 
               <div>
                 <h4 className="text-lg md:text-xl font-bold">
                   Proven Quality
