@@ -37,7 +37,7 @@ const Contact = () => {
               <textarea rows="5" placeholder="Tell us about your requirements..." className="w-full bg-white border border-gray-200 p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#0056B3]/20 focus:border-[#0056B3] transition-all resize-none"></textarea>
             </div>
             
-            <button className="flex items-center justify-center gap-3 w-full bg-[#0056B3] text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-lg shadow-blue-100 group">
+            <button className="flex items-center justify-center gap-3 w-full bg-[#0056B3] text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-red-500 transition-all shadow-lg shadow-blue-100 group">
               Submit Message
               <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </button>

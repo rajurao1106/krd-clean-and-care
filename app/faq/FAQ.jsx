@@ -142,7 +142,7 @@ const FAQPage = () => {
                   <input required type="tel" placeholder="Mobile Number*" className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-[#0056B3] focus:ring-1 focus:ring-[#0056B3] outline-none text-sm transition-all" />
                   <textarea required placeholder="How can we help you?" rows={4} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:border-[#0056B3] focus:ring-1 focus:ring-[#0056B3] outline-none text-sm resize-none transition-all"></textarea>
                   
-                  <button type="submit" className="group w-full bg-[#0056B3] hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-200">
+                  <button type="submit" className="group w-full bg-[#0056B3] hover:bg-red-500 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-200">
                     <span>Send Message</span>
                     <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </button>
