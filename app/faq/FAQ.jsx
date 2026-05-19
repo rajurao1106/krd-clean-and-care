@@ -1,39 +1,54 @@
-"use client"
+"use client";
 
-import React, { useState } from "react";
-import { ChevronDown, ChevronUp, Send, CheckCircle2 } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ChevronDown, Send, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import faq from "@/public/faq/faq.png";
+import apiClient from "@/utils/api"; // Central Axios instance client
 
 const FAQPage = () => {
+  const [faqs, setFaqs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [openIndex, setOpenIndex] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const faqs = [
-    {
-      question: "Are your cleaning products herbal?",
-      answer: "Yes, we offer a range of herbal-based products, including our popular Neem and Lemon Grass cleaners. These are formulated to be tough on dirt but gentle on the environment and users.",
-    },
-    {
-      question: "Where is your manufacturing unit located?",
-      answer: "Our state-of-the-art manufacturing units are strategically located in the Mandhar and Amaseoni Industrial Areas in Raipur, Chhattisgarh, allowing us to efficiently distribute across Central India.",
-    },
-    {
-      question: "Do you offer bulk B2B pricing?",
-      answer: "Absolutely. As a registered Private Limited manufacturer, we specialize in high-volume supply for retail chains, hospitality sectors, and industrial clients with tiered pricing structures.",
-    },
-    {
-      question: "Are your products GST compliant?",
-      answer: "Yes, KRD Clean and Care Private Limited is a fully GST-registered entity. All our invoices are compliant, making it easy for B2B clients to claim input tax credits.",
-    },
-  ];
+  useEffect(() => {
+    const fetchFAQPageData = async () => {
+      try {
+        // Central endpoint data fetch setup
+        const response = await apiClient.get("/api/admin/faqs");
+        const rawFaqs = response.data?.faqs || response.data || [];
+
+        // Active items filter + validation checks for FAQ Page specifically
+        const targetFaqs = rawFaqs
+          .filter((item) => item.is_active === 1 && (item.page === "faq" || item.page === "both"))
+          .sort((a, b) => a.sort_order - b.sort_order);
+
+        setFaqs(targetFaqs);
+      } catch (error) {
+        console.error("FAQ page data pipeline error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFAQPageData();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitted(true);
-    // Add your API logic here
+    // Form action handler setup hooks yahan add kar sakte hain
   };
+
+  if (loading) {
+    return (
+      <div className="w-full min-h-screen bg-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#0056B3]"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-blue-100">
@@ -70,11 +85,9 @@ const FAQPage = () => {
             </div>
           </motion.div>
         </div>
-
-    
       </header>
 
-      {/* Main Content */}
+      {/* Main Content Area */}
       <main className="max-w-7xl mx-auto px-6 -mt-16 pb-20 flex flex-col lg:flex-row gap-12">
         
         {/* Accordion Section */}
@@ -87,7 +100,7 @@ const FAQPage = () => {
           <div className="space-y-4">
             {faqs.map((item, index) => (
               <div 
-                key={index} 
+                key={item.id || index} 
                 className={`transition-all duration-300 rounded-xl border ${
                   openIndex === index ? 'border-blue-200 bg-blue-50/30' : 'border-gray-100 bg-white shadow-sm'
                 }`}
@@ -144,7 +157,6 @@ const FAQPage = () => {
                   
                   <button type="submit" className="group w-full bg-[#0056B3] hover:bg-red-500 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-200">
                     <span>Send Message</span>
-                    <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </button>
                 </form>
               </>

@@ -1,25 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Plus, Minus } from "lucide-react";
-
-const faqData = [
-  {
-    question: "Are your cleaning products herbal?",
-    answer:
-      "Yes, we offer a range of herbal-based products, including our popular Neem and Lemon Grass cleaners.",
-  },
-  {
-    question: "Where is your manufacturing unit located?",
-    answer:
-      "We operate from the Mandhar and Amaseoni Industrial Areas in Raipur, Chhattisgarh.",
-  },
-  {
-    question: "Do you offer bulk B2B pricing?",
-    answer:
-      "Absolutely. As a registered Private Limited manufacturer, we specialize in high-volume supply for retail and industrial sectors.",
-  },
-];
+import apiClient from "@/utils/api"; // Aapka central Axios client layer
 
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,10 +46,58 @@ const FAQItem = ({ question, answer }) => {
   );
 };
 
-export default function FAQSection() {
+// isHomePage prop lagaya hai taaki page configuration handle ho sake
+export default function FAQSection({ isHomePage = false }) {
+  const [faqs, setFaqs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const response = await apiClient.get("/api/admin/faqs");
+        const rawFaqs = response.data?.faqs || response.data || [];
+
+        // 1. Pehle sirf active elements filter karein
+        let filteredFaqs = rawFaqs.filter((item) => item.is_active === 1);
+
+        // 2. Agar home page par render kar rahe hain to sirf page 'both' dikhayein
+        if (isHomePage) {
+          filteredFaqs = filteredFaqs.filter(
+            (item) => item.page === "both" || item.page === "home"
+          );
+        }
+
+        // 3. Sort order ke mutabik sequence order arrange karein
+        const sortedFaqs = filteredFaqs.sort((a, b) => a.sort_order - b.sort_order);
+
+        setFaqs(sortedFaqs);
+      } catch (error) {
+        console.error("FAQs data network layer crash error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFaqs();
+  }, [isHomePage]);
+
+  // Loading indicator skeleton state
+  if (loading) {
+    return (
+      <div className="w-full py-20 bg-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#0056B3]"></div>
+      </div>
+    );
+  }
+
+  // Agar backend empty ho to section skip karne ke liye
+  if (faqs.length === 0) return null;
+
   return (
     <section className="bg-white py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
+        
+        {/* Header Section */}
         <header className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 tracking-tight">
             Ask Us Anything
@@ -76,10 +107,11 @@ export default function FAQSection() {
           </p>
         </header>
 
+        {/* Dynamic FAQ List Grid wrapper */}
         <div className="space-y-1">
-          {faqData.map((item, index) => (
+          {faqs.map((item) => (
             <FAQItem
-              key={index}
+              key={item.id}
               question={item.question}
               answer={item.answer}
             />
