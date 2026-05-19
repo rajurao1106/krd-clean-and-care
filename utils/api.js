@@ -1,10 +1,9 @@
 // utils/api.js
 import axios from 'axios';
 
-// Yahan apna backend link (Base URL) add karein
 const apiClient = axios.create({
-  baseURL: 'http://localhost:3001', // Aapka backend URL
-  timeout: 10000, // Agar 10 seconds tak response na aaye toh request cancel ho jaye
+  baseURL: 'https://krd-admin-backend-five.vercel.app', 
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
