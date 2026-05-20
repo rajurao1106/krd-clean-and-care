@@ -1,6 +1,7 @@
 // components/GlobalBanner.jsx
 import hero1 from "@/public/homepage/hero1.png";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function GlobalBanner() {
   return (
@@ -43,10 +44,10 @@ export default function GlobalBanner() {
           </div>
 
           {/* CTA Button */}
-          <button className="group mt-4 inline-flex items-center gap-2 bg-white text-[#0D47A1] font-bold text-sm md:text-base px-8 py-3.5 rounded-full shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]">
+          <Link href={"/contact"} className="group mt-4 inline-flex items-center gap-2 bg-white text-[#0D47A1] font-bold text-sm md:text-base px-8 py-3.5 rounded-full shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]">
             <CartIcon />
             Shop Now
-          </button>
+          </Link>
         </div>
       </div>
     </section>

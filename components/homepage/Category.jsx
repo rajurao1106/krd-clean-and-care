@@ -5,13 +5,14 @@ import product3 from "@/public/homepage/product3.jpg";
 import product4 from "@/public/homepage/product4.jpg";
 import product5 from "@/public/homepage/product5.jpg";
 import { HiOutlineArrowRight } from "react-icons/hi2";
+import Link from "next/link";
 
 const categories = [
-  { name: "Glass & Surface", image: product1, isNew: true, link:"/products" },
-  { name: "Floor Cleaners", image: product2, isNew: true, link:"/products" },
-  { name: "Toilet Care", image: product3, link:"/products" },
-  { name: "Milky Perfumed Cleaner", image: product4, link:"/products" },
-  { name: "Dish Wash Gel", image: product5, link:"/products" },
+  { name: "Glass & Surface", image: product1, isNew: true, link: "/products" },
+  { name: "Floor Cleaners", image: product2, isNew: true, link: "/products" },
+  { name: "Toilet Care", image: product3, link: "/products" },
+  { name: "Milky Perfumed Cleaner", image: product4, link: "/products" },
+  { name: "Dish Wash Gel", image: product5, link: "/products" },
 ];
 
 export default function CategorySection() {
@@ -20,9 +21,12 @@ export default function CategorySection() {
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-10">
-          <p className="text-center uppercase text-xl font-semibold">
-            Our Categories
-          </p>
+          <p className="text-center uppercase text-xl font-semibold"></p>
+          <div className="flex justify-center items-center">
+            <p className="text-center bg-blue-50 text-[#0056B3] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-2">
+              Our Categories
+            </p>
+          </div>
           <h2 className="text-3xl text-center md:text-5xl font-semibold leading-tight text-gray-900">
             Explore our{" "}
             <span className="text-[#0056B3]">cleaning categories</span>
@@ -75,7 +79,7 @@ export default function CategorySection() {
                 </p>
 
                 {/* Arrow — reveals on hover */}
-                <div
+                <Link href={"/products"}
                   className="flex items-center justify-center gap-2 px-3 py-1.5
              rounded-full border border-gray-200 text-gray-400
              opacity-0 translate-y-1
@@ -87,7 +91,7 @@ export default function CategorySection() {
                     View More
                   </span>
                   <HiOutlineArrowRight size={14} strokeWidth={3} />
-                </div>
+                </Link>
               </div>
             </div>
           ))}

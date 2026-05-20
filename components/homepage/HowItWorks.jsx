@@ -67,9 +67,9 @@ const HowItWorks = () => {
             <h3 className="text-2xl font-bold mb-4 px-4 leading-tight">
               {step.title}
             </h3>
-            <p className="text-sm leading-relaxed opacity-95 max-w-sm">
+            {/* <p className="text-sm leading-relaxed opacity-95 max-w-sm">
               {step.description}
-            </p>
+            </p> */}
           </div>
         ))}
       </div>

@@ -75,7 +75,7 @@ const HeroSection = () => {
               className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.1] mb-6"
             >
               {title.includes("India's") ? (
-                <h1 className="">
+                <h1 className="text-[#0056B3]">
                   India&apos;s{" "}
                   <span className="block lg:inline">
                     {title.replace("India's", "").trim()}
@@ -117,18 +117,22 @@ const HeroSection = () => {
                 priority
               />
 
-              {/* Floating Tags */}
-              <div className="absolute top-[10%] -left-2 md:-left-8 bg-red-500 px-3 py-1.5 md:px-5 md:py-2.5 rounded-full shadow-xl border border-gray-100 hidden xs:block">
-                <span className="text-[10px] md:text-sm font-bold text-black whitespace-nowrap">
-                  Corporate cleaning
-                </span>
-              </div>
+             {/* Floating Tags */}
+{/* Tag 1 */}
+<div className="absolute top-[10%] -left-2 md:-left-8 bg-white px-3 py-1.5 md:px-5 md:py-2.5 rounded-full shadow-xl border border-gray-100 block"> 
+  {/* Yahan 'hidden xs:block' ko hata kar sirf 'block' kiya hai taaki har screen par dikhe */}
+  <span className="text-[10px] md:text-sm font-bold text-black whitespace-nowrap">
+    Corporate cleaning
+  </span>
+</div>
 
-              <div className="absolute bottom-[15%] -right-2 md:-right-8 bg-white px-3 py-1.5 md:px-5 md:py-2.5 rounded-full shadow-xl border border-gray-100 hidden xs:block">
-                <span className="text-[10px] md:text-sm font-bold text-black whitespace-nowrap">
-                  Industrial Cleaning
-                </span>
-              </div>
+{/* Tag 2 */}
+<div className="absolute bottom-[15%] -right-2 md:-right-8 bg-white px-3 py-1.5 md:px-5 md:py-2.5 rounded-full shadow-xl border border-gray-100 block"> 
+  {/* Yahan bhi 'block' kiya hai */}
+  <span className="text-[10px] md:text-sm font-bold text-black whitespace-nowrap">
+    Industrial Cleaning
+  </span>
+</div>
             </div>
 
             {/* Background Glow */}

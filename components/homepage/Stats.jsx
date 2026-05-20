@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react";
 import apiClient from "@/utils/api"; // Aapka Axios utility client
 
 // Icons Import
-import { IoWaterOutline } from "react-icons/io5"; // For 'water'
-import { FiPackage } from "react-icons/fi"; // For 'package'
-import { LuRefreshCw } from "react-icons/lu"; // For 'refresh'
-import { HiOutlineUsers } from "react-icons/hi2"; // For 'users'
+import { IoWaterOutline } from "react-icons/io5"; 
+import { FiPackage } from "react-icons/fi"; 
+import { LuRefreshCw } from "react-icons/lu"; 
+import { HiOutlineUsers } from "react-icons/hi2"; 
 
 const ImpactSection = () => {
   const [statsData, setStatsData] = useState([]);
@@ -74,7 +74,7 @@ const ImpactSection = () => {
         
         {/* Main Heading */}
         <div className="text-center mb-12 md:mb-20">
-          <h2 className="text-3xl md:text-5xl font-[Lato] lg:text-6xl font-bold text-gray-900 leading-tight">
+          <h2 className="text-3xl md:text-5xl font-[Lato] font-bold text-gray-900 leading-tight">
             It&apos;s not just clean,
             <br className="sm:hidden" /> it&apos;s{" "}
             <span className="text-[#0056B3]">

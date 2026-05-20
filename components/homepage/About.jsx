@@ -50,10 +50,10 @@ export default function AboutSection() {
   }
 
   // Dynamic values Mapping with robust fallbacks
-  const miniTitle = aboutData?.mini_title || "Who We Are";
-  const title = aboutData?.title || "Housekeeping Products Clean Without Compromise";
-  const paragraph = aboutData?.paragraph || "Established in 2021, KRD Clean and Care Private Limited combines modern chemical engineering with eco-friendly ingredients.";
-  const bgColor = aboutData?.bg_color || "#FFFFFF";
+  const miniTitle = aboutData?.mini_title ;
+  const title = aboutData?.title ;
+  const paragraph = aboutData?.paragraph;
+  const bgColor = aboutData?.bg_color ;
 
   return (
     <section 
@@ -105,10 +105,10 @@ export default function AboutSection() {
               fontFamily: aboutData?.title_font || 'Lato',
               color: aboutData?.title_color || '#0056B3' 
             }}
-            className="text-3xl md:text-5xl font-semibold leading-[1.1]"
+            className="text-3xl  md:text-5xl font-semibold leading-[1.1]"
           >
             {title.includes("Clean Without Compromise") ? (
-              <h1>
+              <h1 className="text-[#0056B3]">
                 {title.trim()} <br className="hidden md:block" />
               </h1>
             ) : (

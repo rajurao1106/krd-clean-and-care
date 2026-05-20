@@ -62,7 +62,7 @@ const OurClients = () => {
   return (
     <div className="bg-white py-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-center text-3xl font-bold text-[#8DBE3F] mb-12">
+        <h2 className="text-center text-3xl font-bold text-blue-500 mb-12">
           Our Clients
         </h2>
 

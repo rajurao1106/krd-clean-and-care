@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { products } from "@/data/products";
+import Link from "next/link";
 
 const Products = () => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -57,16 +58,18 @@ const Products = () => {
       {/* Header */}
       <div className="flex font-[Lato] max-lg:flex-col justify-between items-end max-lg:items-start max-lg:gap-4 mb-8">
         <div>
-          <span className="text-gray-500 text-sm font-medium">
-            Our Products
-          </span>
-          <h2 className="text-4xl font-bold text-gray-900 mt-1">
+           <div className="flex justify-start items-center ">
+            <p className="text-center bg-blue-50 text-[#0056B3] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-2">
+             Our Products
+            </p>
+          </div>
+          <h2 className="text-5xl max-lg:text-4xl font-bold text-gray-900 mt-1">
             Our <span className="text-[#0056B3]">Best Sellers</span> Products
           </h2>
         </div>
-        <button className="bg-[#0056B3] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-red-500 transition">
+        <Link href={"/products"} className="bg-[#0056B3] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-red-500 transition">
           View All Products
-        </button>
+        </Link>
       </div>
 
       {/* ✅ Category Tabs — yeh pehle remove ho gaya tha */}

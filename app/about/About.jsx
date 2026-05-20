@@ -62,9 +62,9 @@ const About = () => {
           <h2 
             style={{ 
               fontFamily: aboutHero?.title_font || 'Lato',
-              color: aboutHero?.title_color || '#0056B3' 
+             
             }}
-            className="text-3xl md:text-4xl lg:text-6xl font-bold leading-tight mb-6"
+            className="text-3xl md:text-4xl text-[#0056B3] lg:text-6xl font-bold leading-tight mb-6"
           >
             {title}
           </h2>

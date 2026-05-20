@@ -1,55 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Plus, Minus } from "lucide-react";
-import apiClient from "@/utils/api"; // Aapka central Axios client layer
+import { ChevronDown } from "lucide-react";
+import apiClient from "@/utils/api"; 
+import { motion, AnimatePresence } from "framer-motion";
 
-const FAQItem = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
+// Unused imports (Plus, Minus, Send, CheckCircle2, Image) removed to keep it clean.
 
-  return (
-    <div className="mb-4 overflow-hidden border border-transparent transition-all duration-200">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        aria-expanded={isOpen}
-        className={`w-full flex items-center justify-between p-5 md:p-6 transition-all duration-300 text-left group rounded-xl ${
-          isOpen 
-            ? "bg-[#c6d7f3] shadow-sm rounded-b-none" 
-            : "bg-[#e9ecf7a4] hover:bg-[#dbe6f8]"
-        }`}
-      >
-        <span className="text-lg md:text-xl font-semibold text-gray-900 pr-4">
-          {question}
-        </span>
-        <div className={`flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
-          {isOpen ? (
-            <Minus className="w-6 h-6 text-blue-700" />
-          ) : (
-            <Plus className="w-6 h-6 text-gray-500 group-hover:text-gray-900" />
-          )}
-        </div>
-      </button>
-
-      {/* Modern Smooth Height Transition using CSS Grid */}
-      <div
-        className={`grid transition-all duration-300 ease-in-out bg-[#fcfaf6] rounded-b-xl border-x border-b border-gray-100 ${
-          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <div className="p-6 text-gray-700 leading-relaxed md:text-lg border-t border-blue-100/50">
-            {answer}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// isHomePage prop lagaya hai taaki page configuration handle ho sake
 export default function FAQSection({ isHomePage = false }) {
   const [faqs, setFaqs] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // FIX: Added the missing state for accordion management
+  const [openIndex, setOpenIndex] = useState(-1);
 
   useEffect(() => {
     const fetchFaqs = async () => {
@@ -60,7 +23,7 @@ export default function FAQSection({ isHomePage = false }) {
         // 1. Pehle sirf active elements filter karein
         let filteredFaqs = rawFaqs.filter((item) => item.is_active === 1);
 
-        // 2. Agar home page par render kar rahe hain to sirf page 'both' dikhayein
+        // 2. Agar home page par render kar rahe hain to page 'both' ya 'home' dikhayein
         if (isHomePage) {
           filteredFaqs = filteredFaqs.filter(
             (item) => item.page === "both" || item.page === "home"
@@ -68,7 +31,9 @@ export default function FAQSection({ isHomePage = false }) {
         }
 
         // 3. Sort order ke mutabik sequence order arrange karein
-        const sortedFaqs = filteredFaqs.sort((a, b) => a.sort_order - b.sort_order);
+        const sortedFaqs = filteredFaqs.sort(
+          (a, b) => a.sort_order - b.sort_order
+        );
 
         setFaqs(sortedFaqs);
       } catch (error) {
@@ -96,28 +61,71 @@ export default function FAQSection({ isHomePage = false }) {
   return (
     <section className="bg-white py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        
         {/* Header Section */}
         <header className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 tracking-tight">
-            Ask Us Anything
+          <h2 className="text-4xl md:text-5xl font-semibold text-[#0056B3] mb-4 tracking-tight">
+            Frequently Asked Questions
           </h2>
           <p className="text-gray-500 font-[poppins] text-lg">
-            Have questions? We're here to help you make the eco-friendly switch.
+            Find quick answers about our cleaning formulations, bulk ordering,
+            eco-friendly standards, and industrial supply capabilities.
           </p>
         </header>
 
         {/* Dynamic FAQ List Grid wrapper */}
-        <div className="space-y-1">
-          {faqs.map((item) => (
-            <FAQItem
-              key={item.id}
-              question={item.question}
-              answer={item.answer}
-            />
+        <div className="space-y-4">
+          {faqs.map((item, index) => (
+            <div
+              key={item.id || index}
+              className={`transition-all duration-300 rounded-xl border ${
+                openIndex === index
+                  ? "border-blue-200 bg-blue-50/30"
+                  : "border-gray-100 bg-white shadow-sm"
+                }`}
+            >
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
+                aria-expanded={openIndex === index}
+                className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+              >
+                <span
+                  className={`text-lg font-semibold transition-colors duration-200 ${
+                    openIndex === index ? "text-[#0056B3]" : "text-slate-800"
+                  }`}
+                >
+                  {item.question}
+                </span>
+                <div
+                  className={`p-1 rounded-full transition-transform duration-300 ${
+                    openIndex === index ? "rotate-180 bg-blue-100" : "bg-gray-50"
+                  }`}
+                >
+                  <ChevronDown
+                    className={`w-5 h-5 ${
+                      openIndex === index ? "text-[#0056B3]" : "text-gray-400"
+                    }`}
+                  />
+                </div>
+              </button>
+
+              <AnimatePresence initial={false}>
+                {openIndex === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6 text-gray-600 leading-relaxed text-base">
+                      {item.answer}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           ))}
         </div>
-    
       </div>
     </section>
   );

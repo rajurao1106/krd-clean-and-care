@@ -118,7 +118,7 @@ export default function TestimonialSection() {
         
         {/* Header Section */}
         <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-3xl font-[Lato] md:text-5xl font-semibold text-gray-900 mb-4 md:mb-6">
+          <h2 className="text-3xl text-[#0056B3] font-[Lato] md:text-5xl font-semibold mb-4 md:mb-6">
             What Our Clients Say
           </h2>
           <p className="max-w-3xl font-[poppins] mx-auto text-gray-600 leading-relaxed text-base md:text-lg">
