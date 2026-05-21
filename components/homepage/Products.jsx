@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { products } from "@/data/products";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const Products = () => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -53,27 +54,49 @@ const Products = () => {
     ],
   };
 
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+  };
+
   return (
     <section className="py-12 px-6 max-w-7xl mx-auto font-sans">
       {/* Header */}
-      <div className="flex font-[Lato] max-lg:flex-col justify-between items-end max-lg:items-start max-lg:gap-4 mb-8">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+        className="flex font-[Lato] max-lg:flex-col justify-between items-end max-lg:items-start max-lg:gap-4 mb-8"
+      >
         <div>
-           <div className="flex justify-start items-center ">
+          <motion.div variants={fadeInUpVariants} className="flex justify-start items-center ">
             <p className="text-center bg-blue-50 text-[#0056B3] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-2">
-             Our Products
+              Our Products
             </p>
-          </div>
-          <h2 className="text-5xl max-lg:text-4xl font-bold text-gray-900 mt-1">
+          </motion.div>
+          <motion.h2 variants={fadeInUpVariants} className="text-5xl max-lg:text-4xl font-bold text-gray-900 mt-1">
             Our <span className="text-[#0056B3]">Best Sellers</span> Products
-          </h2>
+          </motion.h2>
         </div>
-        <Link href={"/products"} className="bg-[#0056B3] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-red-500 transition">
-          View All Products
-        </Link>
-      </div>
+        <motion.div variants={fadeInUpVariants}>
+          <Link
+            href={"/products"}
+            className="bg-[#0056B3] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-red-500 transition block text-center"
+          >
+            View All Products
+          </Link>
+        </motion.div>
+      </motion.div>
 
-      {/* ✅ Category Tabs — yeh pehle remove ho gaya tha */}
-      <div className="flex gap-3 overflow-x-auto pb-8 no-scrollbar">
+      {/* ✅ Category Tabs */}
+      <motion.div 
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="flex gap-3 overflow-x-auto pb-8 no-scrollbar"
+      >
         {categories.map((cat) => (
           <button
             key={cat}
@@ -87,10 +110,16 @@ const Products = () => {
             {cat}
           </button>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Carousel */}
-      <div className="relative">
+      {/* Carousel Wrapper */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="relative"
+      >
         {/* Prev Button */}
         <button
           onClick={() => sliderRef.current?.slickPrev()}
@@ -110,7 +139,8 @@ const Products = () => {
         <Slider ref={sliderRef} {...settings} className="product-slider">
           {filteredProducts.map((product) => (
             <div key={product.id} className="px-3">
-              <div className="group relative">
+              {/* layout prop ensures smooth visual position scaling when products array changes context */}
+              <motion.div layout className="group relative">
                 <div
                   className="relative aspect-[4/5] rounded-3xl overflow-hidden"
                   style={{ backgroundColor: product.color }}
@@ -129,11 +159,11 @@ const Products = () => {
                     {product.title}
                   </h3>
                 </div>
-              </div>
+              </motion.div>
             </div>
           ))}
         </Slider>
-      </div>
+      </motion.div>
     </section>
   );
 };

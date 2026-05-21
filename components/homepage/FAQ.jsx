@@ -5,13 +5,9 @@ import { ChevronDown } from "lucide-react";
 import apiClient from "@/utils/api"; 
 import { motion, AnimatePresence } from "framer-motion";
 
-// Unused imports (Plus, Minus, Send, CheckCircle2, Image) removed to keep it clean.
-
 export default function FAQSection({ isHomePage = false }) {
   const [faqs, setFaqs] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-  // FIX: Added the missing state for accordion management
   const [openIndex, setOpenIndex] = useState(-1);
 
   useEffect(() => {
@@ -58,30 +54,55 @@ export default function FAQSection({ isHomePage = false }) {
   // Agar backend empty ho to section skip karne ke liye
   if (faqs.length === 0) return null;
 
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+  };
+
+  const rowVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
+  };
+
   return (
     <section className="bg-white py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
-        <header className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-semibold text-[#0056B3] mb-4 tracking-tight">
+        <motion.header 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+          className="text-center mb-16"
+        >
+          <motion.h2 variants={fadeInUpVariants} className="text-4xl md:text-5xl font-semibold text-[#0056B3] mb-4 tracking-tight">
             Frequently Asked Questions
-          </h2>
-          <p className="text-gray-500 font-[poppins] text-lg">
+          </motion.h2>
+          <motion.p variants={fadeInUpVariants} className="text-gray-500 font-[poppins] text-lg">
             Find quick answers about our cleaning formulations, bulk ordering,
             eco-friendly standards, and industrial supply capabilities.
-          </p>
-        </header>
+          </motion.p>
+        </motion.header>
 
         {/* Dynamic FAQ List Grid wrapper */}
-        <div className="space-y-4">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.08 } }
+          }}
+          className="space-y-4"
+        >
           {faqs.map((item, index) => (
-            <div
+            <motion.div
               key={item.id || index}
-              className={`transition-all duration-300 rounded-xl border ${
+              variants={rowVariants}
+              className={`transition-colors duration-300 rounded-xl border ${
                 openIndex === index
                   ? "border-blue-200 bg-blue-50/30"
                   : "border-gray-100 bg-white shadow-sm"
-                }`}
+              }`}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
@@ -123,9 +144,9 @@ export default function FAQSection({ isHomePage = false }) {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

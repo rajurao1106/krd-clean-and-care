@@ -1,7 +1,10 @@
+"use client";
+
 import React from 'react';
 import { Factory, Home, Building2, Leaf } from 'lucide-react';
 import about2 from "@/public/about/about2.jpg"
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const Services = () => {
   const services = [
@@ -35,8 +38,21 @@ const Services = () => {
     }
   ];
 
-  const ServiceCard = ({ service }) => (
-    <div className="bg-[#f0f7ff] p-8 rounded-xl relative group hover:shadow-lg transition-all duration-300">
+  const cardLeftVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
+  const cardRightVariants = {
+    hidden: { opacity: 0, x: 30 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
+  const ServiceCard = ({ service, variants }) => (
+    <motion.div 
+      variants={variants}
+      className="bg-[#f0f7ff] p-8 rounded-xl relative group hover:shadow-lg transition-all duration-300"
+    >
       <span className="absolute top-4 right-6 text-4xl font-bold text-gray-200 group-hover:text-blue-100 transition-colors">
         {service.id}
       </span>
@@ -50,13 +66,19 @@ const Services = () => {
       <button className="text-blue-500 font-bold text-xs tracking-widest border-b-2 border-blue-500 pb-1 hover:text-blue-700 hover:border-blue-700 transition-colors">
         READ MORE
       </button>
-    </div>
+    </motion.div>
   );
 
   return (
     <section className="py-20 px-6 max-w-7xl mx-auto font-sans">
       {/* Header */}
-      <div className="mb-16">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="mb-16"
+      >
         <h2 className="text-3xl md:text-5xl font-bold font-[lato] text-slate-900 mb-2">
           Excellence At The Core Of Our Services
         </h2>
@@ -66,35 +88,53 @@ const Services = () => {
           </span>
           <div className="h-[1px] flex-grow bg-gray-100"></div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Grid Layout */}
+      {/* Grid Layout Container */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
         
         {/* Left Column */}
-        <div className="flex flex-col gap-8">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+          className="flex flex-col gap-8"
+        >
           {services.filter(s => s.column === "left").map(service => (
-            <ServiceCard key={service.id} service={service} />
+            <ServiceCard key={service.id} service={service} variants={cardLeftVariants} />
           ))}
-        </div>
+        </motion.div>
 
-        {/* Center Image Column - FIXED */}
-        <div className="relative rounded-xl overflow-hidden bg-[#f0f7ff] min-h-[400px] lg:min-h-full">
+        {/* Center Image Column */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+          className="relative rounded-xl overflow-hidden bg-[#f0f7ff] min-h-[400px] lg:min-h-full"
+        >
           <Image
             src={about2}
             alt="Professional Cleaner"
             fill
             className="object-cover object-center"
-            placeholder="blur" // Optional: gives a nice loading effect
+            placeholder="blur"
           />
-        </div>
+        </motion.div>
 
         {/* Right Column */}
-        <div className="flex flex-col gap-8">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+          className="flex flex-col gap-8"
+        >
           {services.filter(s => s.column === "right").map(service => (
-            <ServiceCard key={service.id} service={service} />
+            <ServiceCard key={service.id} service={service} variants={cardRightVariants} />
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

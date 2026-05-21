@@ -5,6 +5,7 @@ import { CheckCircle2 } from "lucide-react";
 import about1 from "@/public/about/about3.jpg";
 import Image from "next/image";
 import apiClient from "@/utils/api"; // Central Axios utility client
+import { motion } from "framer-motion";
 
 const About = () => {
   const [aboutHero, setAboutHero] = useState(null);
@@ -50,6 +51,11 @@ const About = () => {
   const paragraph = aboutHero?.paragraph || "Founded in 2021, KRD Clean and Care Pvt Ltd is committed to providing premium cleaning solutions with a focus on quality and sustainability. We serve various industries with excellence from our base in Raipur.";
   const bgColor = aboutHero?.bg_color || "#FFFFFF";
 
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 25 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
   return (
     <section 
       style={{ backgroundColor: bgColor }}
@@ -58,23 +64,32 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 lg:pt-20 flex flex-col lg:flex-row items-center gap-10 lg:gap-12">
         
         {/* Left Content Side */}
-        <div className="w-full lg:w-1/2 z-10 order-2 lg:order-1">
-          <h2 
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.12 } }
+          }}
+          className="w-full lg:w-1/2 z-10 order-2 lg:order-1"
+        >
+          <motion.h2 
+            variants={fadeInUpVariants}
             style={{ 
               fontFamily: aboutHero?.title_font || 'Lato',
-             
             }}
             className="text-3xl md:text-4xl text-[#0056B3] lg:text-6xl font-bold leading-tight mb-6"
           >
             {title}
-          </h2>
+          </motion.h2>
 
-          <p 
+          <motion.p 
+            variants={fadeInUpVariants}
             style={{ color: aboutHero?.paragraph_color || '#4B5563' }}
             className="text-base md:text-lg mb-8 md:mb-10 max-w-xl leading-relaxed"
           >
             {paragraph}
-          </p>
+          </motion.p>
 
           {/* Features List (Static data with dynamic icon styling integration) */}
           <div className="space-y-5 md:space-y-6">
@@ -96,7 +111,11 @@ const About = () => {
                 desc: "Our brand, Vis Clean, focuses on eco-friendly formulations, including herbal and non-toxic options.",
               },
             ].map((item, index) => (
-              <div key={index} className="flex items-start gap-3 md:gap-4">
+              <motion.div 
+                key={index} 
+                variants={fadeInUpVariants}
+                className="flex items-start gap-3 md:gap-4"
+              >
                 <CheckCircle2 
                   style={{ color: aboutHero?.title_color || '#0056B3' }} // Syncs icon color with theme title color
                   className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0 mt-1" 
@@ -107,15 +126,21 @@ const About = () => {
                   </span>{" "}
                   {item.desc}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Image Side */}
         <div className="w-full lg:w-1/2 relative order-1 lg:order-2 flex justify-center">
           {/* Main Image Container */}
-          <div className="relative z-10 w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+            className="relative z-10 w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]"
+          >
             <Image
               src={aboutHero?.image_url || about1} // Remote URL if parsed, else base storage backup
               alt="Cleaning Professional"
@@ -124,7 +149,7 @@ const About = () => {
               className="object-contain object-center"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

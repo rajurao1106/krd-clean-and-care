@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link"; // Link add kiya routing ke liye
 import { products } from "@/data/products";
+import { motion, AnimatePresence } from "framer-motion";
 
 const categories = [
   "All",
@@ -84,36 +85,53 @@ const ProductPage = () => {
           </div>
         </aside>
 
-        {/* Product Grid */}
-        <main className="flex-1">
+        {/* Product Grid Panel with Layout Tracking animations */}
+        <main className="flex-1 w-full">
           {displayProducts.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-64 text-gray-400">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex flex-col items-center justify-center h-64 text-gray-400"
+            >
               <p className="text-lg font-medium">No products found</p>
-            </div>
+            </motion.div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {displayProducts.map((product) => (
-                <div key={product.id} className="border border-gray-200 rounded-xl p-4 flex flex-col bg-white hover:shadow-xl transition-shadow">
-                  <div className="aspect-square w-full mb-4 flex items-center justify-center  rounded-lg overflow-hidden">
-                    <img src={product.image} alt={product.title} className="max-h-full object-contain p-4" />
-                  </div>
-                  <span className="text-[10px] uppercase tracking-widest font-bold text-[#0056B3] bg-[#e8f1fb] px-2 py-1 rounded mb-2 self-start">
-                    {product.category}
-                  </span>
-                  <h3 className="text-sm font-semibold text-gray-800 mb-4 flex-grow line-clamp-2">
-                    {product.title}
-                  </h3>
-                  
-                  {/* Know More Button linked to Dynamic Route */}
-                  <Link 
-                    href={`/products/${product.id}`}
-                    className="w-full bg-[#0056B3] text-white text-center py-2.5 rounded-lg font-medium text-sm hover:bg-[#004494] transition-colors"
+            <motion.div 
+              layout
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              <AnimatePresence mode="popLayout">
+                {displayProducts.map((product) => (
+                  <motion.div 
+                    key={product.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.92 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.2 } }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    className="border border-gray-200 rounded-xl p-4 flex flex-col bg-white hover:shadow-xl transition-shadow"
                   >
-                    Know More
-                  </Link>
-                </div>
-              ))}
-            </div>
+                    <div className="aspect-square w-full mb-4 flex items-center justify-center rounded-lg overflow-hidden">
+                      <img src={product.image} alt={product.title} className="max-h-full object-contain p-4" />
+                    </div>
+                    <span className="text-[10px] uppercase tracking-widest font-bold text-[#0056B3] bg-[#e8f1fb] px-2 py-1 rounded mb-2 self-start">
+                      {product.category}
+                    </span>
+                    <h3 className="text-sm font-semibold text-gray-800 mb-4 flex-grow line-clamp-2">
+                      {product.title}
+                    </h3>
+                    
+                    {/* Know More Button linked to Dynamic Route */}
+                    <Link 
+                      href={`/products/${product.id}`}
+                      className="w-full bg-[#0056B3] text-white text-center py-2.5 rounded-lg font-medium text-sm hover:bg-[#004494] transition-colors"
+                    >
+                      Know More
+                    </Link>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
           )}
         </main>
       </div>

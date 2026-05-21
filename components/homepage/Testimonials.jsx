@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Star, ChevronLeft, ChevronRight, CheckCircle2 } from "lucide-react";
 import apiClient from "@/utils/api"; // Aapka central Axios instance layer
+import { motion, AnimatePresence } from "framer-motion";
 
 const TestimonialCard = ({ item }) => {
   // 90 characters se bade content par "Read more" auto trigger hoga
@@ -112,21 +113,32 @@ export default function TestimonialSection() {
 
   if (testimonials.length === 0) return null;
 
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+  };
+
   return (
     <section className="py-12 px-4 md:py-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* Header Section */}
-        <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-3xl text-[#0056B3] font-[Lato] md:text-5xl font-semibold mb-4 md:mb-6">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+          className="text-center mb-10 md:mb-16"
+        >
+          <motion.h2 variants={fadeInUpVariants} className="text-3xl text-[#0056B3] font-[Lato] md:text-5xl font-semibold mb-4 md:mb-6">
             What Our Clients Say
-          </h2>
-          <p className="max-w-3xl font-[poppins] mx-auto text-gray-600 leading-relaxed text-base md:text-lg">
+          </motion.h2>
+          <motion.p variants={fadeInUpVariants} className="max-w-3xl font-[poppins] mx-auto text-gray-600 leading-relaxed text-base md:text-lg">
             At KRD Clean and Care, we believe that the satisfaction of our
             clients is our success. Listen directly to how we make a difference 
             in their everyday lives.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Carousel/Grid Area */}
         <div className="relative group">
@@ -141,21 +153,33 @@ export default function TestimonialSection() {
 
           {/* Desktop/Tablet Stable Multi-Grid Filter view */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {testimonials.map((t, index) => {
-              // Carousel current shift behavior logic implementation
-              const relativeIndex = (index - currentIndex + testimonials.length) % testimonials.length;
-              
-              let visibilityClass = "hidden";
-              if (relativeIndex === 0) visibilityClass = "block"; // Mobile standard display
-              if (relativeIndex === 1) visibilityClass = "hidden sm:block"; // Tablet side expansion
-              if (relativeIndex === 2 || relativeIndex === 3) visibilityClass = "hidden lg:block"; // Desktop grid sync
-              
-              return (
-                <div key={t.id || index} className={visibilityClass}>
-                  <TestimonialCard item={t} />
-                </div>
-              );
-            })}
+            <AnimatePresence mode="popLayout" initial={false}>
+              {testimonials.map((t, index) => {
+                // Carousel current shift behavior logic implementation
+                const relativeIndex = (index - currentIndex + testimonials.length) % testimonials.length;
+                
+                let visibilityClass = "hidden";
+                if (relativeIndex === 0) visibilityClass = "block"; // Mobile standard display
+                if (relativeIndex === 1) visibilityClass = "hidden sm:block"; // Tablet side expansion
+                if (relativeIndex === 2 || relativeIndex === 3) visibilityClass = "hidden lg:block"; // Desktop grid sync
+                
+                if (visibilityClass === "hidden") return null;
+
+                return (
+                  <motion.div 
+                    key={t.id || index} 
+                    layout
+                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className={visibilityClass}
+                  >
+                    <TestimonialCard item={t} />
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
           </div>
 
           <button 

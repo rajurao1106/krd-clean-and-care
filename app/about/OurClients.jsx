@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { motion } from "framer-motion";
 
 const OurClients = () => {
   // 1. Add state to track if component is mounted
@@ -41,11 +42,10 @@ const OurClients = () => {
     { src: "/logos/team-computers.png", alt: "Team Computers" },
     { src: "/logos/terraform.png", alt: "TerraForm" },
     { src: "/logos/global-vectra.png", alt: "Global Vectra" },
-      { src: "/logos/edelweiss.png", alt: "Edelweiss" },
+    { src: "/logos/edelweiss.png", alt: "Edelweiss" },
     { src: "/logos/team-computers.png", alt: "Team Computers" },
     { src: "/logos/terraform.png", alt: "TerraForm" },
     { src: "/logos/global-vectra.png", alt: "Global Vectra" },
-    // Add your other logo paths here
   ];
 
   // 2. Return a placeholder or null during SSR to prevent the "Super expression" error
@@ -62,23 +62,40 @@ const OurClients = () => {
   return (
     <div className="bg-white py-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-center text-3xl font-bold text-blue-500 mb-12">
+        
+        {/* Animated Heading */}
+        <motion.h2 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="text-center text-3xl font-bold text-blue-500 mb-12"
+        >
           Our Clients
-        </h2>
+        </motion.h2>
 
-        <Slider {...settings} className="flex items-center">
-          {logos.map((logo, index) => (
-            <div key={index} className="px-8 outline-none focus:ring-0 border-none">
-              <div className="relative h-16 w-full flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="max-h-full max-w-full object-contain pointer-events-none"
-                />
+        {/* Smooth wrapper reveal for the infinite marquee */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+        >
+          <Slider {...settings} className="flex items-center">
+            {logos.map((logo, index) => (
+              <div key={index} className="px-8 outline-none focus:ring-0 border-none">
+                <div className="relative h-16 w-full flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="max-h-full max-w-full object-contain pointer-events-none"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
-        </Slider>
+            ))}
+          </Slider>
+        </motion.div>
+        
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import aboutIcon2 from "@/public/homepage/aboutIcon2.png";
 import about3 from "@/public/homepage/about3.jpg";
 import about4 from "@/public/homepage/about4.jpg";
 import apiClient from "@/utils/api"; // Central Axios Utility Instance
+import { motion } from "framer-motion";
 
 export default function AboutSection() {
   const [aboutData, setAboutData] = useState(null);
@@ -55,6 +56,12 @@ export default function AboutSection() {
   const paragraph = aboutData?.paragraph;
   const bgColor = aboutData?.bg_color ;
 
+  // Clean fade up configuration for textual content items
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 25 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
   return (
     <section 
       style={{ backgroundColor: bgColor }}
@@ -65,7 +72,13 @@ export default function AboutSection() {
         {/* Left Side: Image Composition */}
         <div className="relative flex items-center justify-center min-h-[450px] md:min-h-[600px] lg:min-h-[700px]">
           {/* Main Large Oval Image */}
-          <div className="relative w-[260px] h-[400px] sm:w-[320px] sm:h-[480px] md:w-[420px] md:h-[600px] rounded-full overflow-hidden border-8 border-white shadow-2xl z-10">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative w-[260px] h-[400px] sm:w-[320px] sm:h-[480px] md:w-[420px] md:h-[600px] rounded-full overflow-hidden border-8 border-white shadow-2xl z-10"
+          >
             <Image
               src={aboutData?.image_url || about4} 
               alt="Professional cleaner"
@@ -74,10 +87,16 @@ export default function AboutSection() {
               sizes="(max-width: 768px) 260px, 420px"
               priority
             />
-          </div>
+          </motion.div>
 
           {/* Secondary Smaller Oval Image */}
-          <div className="absolute -bottom-4 -right-2 sm:right-4 md:right-0 w-[150px] h-[230px] sm:w-[180px] sm:h-[280px] md:w-[220px] md:h-[340px] rounded-full overflow-hidden border-8 border-white shadow-xl z-20 transition-transform hover:scale-105 duration-300">
+          <motion.div 
+            initial={{ opacity: 0, x: 40, y: 40 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ delay: 0.3, duration: 0.7, ease: "easeOut" }}
+            className="absolute -bottom-4 -right-2 sm:right-4 md:right-0 w-[150px] h-[230px] sm:w-[180px] sm:h-[280px] md:w-[220px] md:h-[340px] rounded-full overflow-hidden border-8 border-white shadow-xl z-20 transition-transform hover:scale-105 duration-300"
+          >
             <Image
               src={about3} 
               alt="Housekeeping staff"
@@ -85,22 +104,34 @@ export default function AboutSection() {
               className="object-cover"
               sizes="(max-width: 768px) 150px, 220px"
             />
-          </div>
+          </motion.div>
 
           {/* Decorative Background Element */}
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-50 rounded-full -z-10 blur-3xl opacity-60"></div>
         </div>
 
         {/* Right Side: Content */}
-        <div className="flex flex-col space-y-6 text-center lg:text-left items-center lg:items-start">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.12 } }
+          }}
+          className="flex flex-col space-y-6 text-center lg:text-left items-center lg:items-start"
+        >
           
           {/* Dynamic Mini Title Tag */}
-          <div className="inline-block bg-blue-50 text-[#0056B3] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-2">
+          <motion.div 
+            variants={fadeInUpVariants}
+            className="inline-block bg-blue-50 text-[#0056B3] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-2"
+          >
             {miniTitle}
-          </div>
+          </motion.div>
 
           {/* Dynamic Header Title */}
-          <h2 
+          <motion.h2 
+            variants={fadeInUpVariants}
             style={{ 
               fontFamily: aboutData?.title_font || 'Lato',
               color: aboutData?.title_color || '#0056B3' 
@@ -108,26 +139,27 @@ export default function AboutSection() {
             className="text-3xl  md:text-5xl font-semibold leading-[1.1]"
           >
             {title.includes("Clean Without Compromise") ? (
-              <h1 className="text-[#0056B3]">
+              <span className="text-[#0056B3]">
                 {title.trim()} <br className="hidden md:block" />
-              </h1>
+              </span>
             ) : (
               title
             )}
-          </h2>
+          </motion.h2>
 
           {/* Dynamic Description Paragraph */}
-          <p 
+          <motion.p 
+            variants={fadeInUpVariants}
             style={{ color: aboutData?.paragraph_color || '#6B7280' }}
             className="font-[poppins] leading-relaxed text-sm md:text-base max-w-xl"
           >
             {paragraph}
-          </p>
+          </motion.p>
 
           {/* Feature List */}
           <div className="space-y-6 md:space-y-8 mt-6 w-full text-left">
             {/* Residential / Eco-Efficiency */}
-            <div className="flex items-start gap-4 group">
+            <motion.div variants={fadeInUpVariants} className="flex items-start gap-4 group">
               <div className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-2xl border border-blue-100 flex items-center justify-center bg-blue-50/50 group-hover:bg-[#0056B3] transition-colors duration-300">
                 <Image
                   src={aboutIcon1}
@@ -145,10 +177,10 @@ export default function AboutSection() {
                   Safe, non-toxic formulations under the Vis Clean brand.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Commercial / Proven Quality */}
-            <div className="flex items-start gap-4 group">
+            <motion.div variants={fadeInUpVariants} className="flex items-start gap-4 group">
               <div className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-2xl border border-blue-100 flex items-center justify-center bg-blue-50/50 group-hover:bg-[#0056B3] transition-colors duration-300">
                 <Image
                   src={aboutIcon2}
@@ -166,19 +198,19 @@ export default function AboutSection() {
                   Trusted by industries across Chhattisgarh for high-performance sanitation.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Dynamic CTA Button */}
-          <div className="pt-6 w-full md:w-auto">
+          <motion.div variants={fadeInUpVariants} className="pt-6 w-full md:w-auto">
             <a 
               href={aboutData?.button_url || "/about"}
               className="inline-block w-full md:w-auto text-center bg-[#0056B3] hover:bg-red-500 text-white font-bold py-4 px-10 rounded-md transition-all duration-300 uppercase text-sm tracking-widest"
             >
               {aboutData?.button_text || "More About Us"}
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* Subtle Bottom Wave Overlay */}

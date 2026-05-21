@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import apiClient from "@/utils/api"; // Aapka Axios utility client
+import { motion } from "framer-motion";
 
 // Icons Import
 import { IoWaterOutline } from "react-icons/io5"; 
@@ -68,12 +69,28 @@ const ImpactSection = () => {
   // Agar database khaali ho ya response na aaye to render rokne ke liye
   if (statsData.length === 0) return null;
 
+  // Frame configurations for grid item cascade entry
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.5, ease: "easeOut" } 
+    }
+  };
+
   return (
     <section className="bg-gray-50 py-16 md:py-24 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* Main Heading */}
-        <div className="text-center mb-12 md:mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center mb-12 md:mb-20"
+        >
           <h2 className="text-3xl md:text-5xl font-[Lato] font-bold text-gray-900 leading-tight">
             It&apos;s not just clean,
             <br className="sm:hidden" /> it&apos;s{" "}
@@ -82,15 +99,25 @@ const ImpactSection = () => {
               KRD Clean And Care
             </span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Dynamic Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.12 } }
+          }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8"
+        >
           {statsData.map((item) => (
-            <div
+            <motion.div
               key={item.id}
+              variants={cardVariants}
+              whileHover={{ y: -8, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
               style={{ backgroundColor: item.bg_color || "#FFFFFF" }} // Dynamic Server Background Color
-              className="rounded-3xl p-6 md:p-8 flex flex-col items-start justify-between min-h-[220px] md:min-h-[280px] transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group"
+              className="rounded-3xl p-6 md:p-8 flex flex-col items-start justify-between min-h-[220px] md:min-h-[280px] transition-shadow duration-300 group"
             >
               {/* Icon Container */}
               <div className="bg-white w-14 h-14 md:w-20 md:h-20 rounded-2xl md:rounded-3xl flex items-center justify-center shadow-sm mb-6 md:mb-10 text-3xl md:text-5xl transition-transform duration-500 group-hover:rotate-[10deg]">
@@ -107,9 +134,9 @@ const ImpactSection = () => {
                   {item.label}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

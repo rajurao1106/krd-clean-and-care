@@ -1,9 +1,16 @@
-// components/GlobalBanner.jsx
+"use client";
+
 import hero1 from "@/public/homepage/hero1.png";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function GlobalBanner() {
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
   return (
     <section className="relative w-full font-[Lato] overflow-hidden bg-[#0D47A1] flex items-center min-h-[500px] md:min-h-[600px]">
       {/* Background radial glow */}
@@ -16,39 +23,58 @@ export default function GlobalBanner() {
       {/* Inner layout */}
       <div className="relative z-10 flex w-full items-center justify-center container mx-auto px-4">
         {/* Center content */}
-        <div className="flex flex-1 flex-col items-center text-center justify-center gap-4 py-12 md:py-20">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.15 } }
+          }}
+          className="flex flex-1 flex-col items-center text-center justify-center gap-4 py-12 md:py-20"
+        >
           {/* Tagline */}
-          <p className="text-white/70  text-[10px] md:text-[11px] uppercase tracking-[2px] font-bold">
+          <motion.p 
+            variants={fadeInUpVariants}
+            className="text-white/70 text-[10px] md:text-[11px] uppercase tracking-[2px] font-bold"
+          >
             KRD Clean And Care{" "}
-          </p>
+          </motion.p>
 
           {/* Headline */}
-          <h1 className="font-black uppercase leading-[1.1] text-white m-0">
+          <motion.h1 variants={fadeInUpVariants} className="font-black uppercase leading-[1.1] text-white m-0">
             <span className="block text-3xl sm:text-4xl md:text-5xl ">
               Power Up Your
             </span>
             <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-yellow-400 drop-shadow-sm">
               Clean Home!
             </span>
-          </h1>
+          </motion.h1>
 
           {/* Product Image - Responsive Sizing */}
-          <div className="flex justify-center w-full max-w-[300px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[850px] transition-all duration-500">
+          <motion.div 
+            variants={{
+              hidden: { opacity: 0, scale: 0.9, y: 20 },
+              visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+            }}
+            className="flex justify-center w-full max-w-[300px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[850px] transition-all duration-500"
+          >
             <Image
               src={hero1}
               alt="Global Cleaning Products"
               priority
-              placeholder="blur" // Optional: if you want a smooth load
+              placeholder="blur"
               className="w-full h-auto drop-shadow-2xl object-contain"
             />
-          </div>
+          </motion.div>
 
           {/* CTA Button */}
-          <Link href={"/contact"} className="group mt-4 inline-flex items-center gap-2 bg-white text-[#0D47A1] font-bold text-sm md:text-base px-8 py-3.5 rounded-full shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]">
-            <CartIcon />
-            Shop Now
-          </Link>
-        </div>
+          <motion.div variants={fadeInUpVariants}>
+            <Link href={"/contact"} className="group mt-4 inline-flex items-center gap-2 bg-white text-[#0D47A1] font-bold text-sm md:text-base px-8 py-3.5 rounded-full shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98]">
+              <CartIcon />
+              Shop Now
+            </Link>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
