@@ -27,15 +27,15 @@ export default function CategorySection() {
     containScroll: "trim" 
   });
 
-  // Buttons ke disabled state ke liye React states
+  // Buttons state tracking
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 
-  // Click hone par scroll karne ke functions
+  // Click handler functions
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
-  // Check karne ke liye ki buttons ko kab enable/disable karna hai
+  // Handle active states of buttons
   const onSelect = useCallback((api) => {
     if (!api) return;
     setPrevBtnDisabled(!api.canScrollPrev());
@@ -68,20 +68,20 @@ export default function CategorySection() {
             Explore our{" "}
             <span className="text-[#0056B3]">cleaning categories</span>
           </h2>
-
-         
         </div>
 
         {/* 1. MOBILE CAROUSEL VIEW */}
-        <div className="block md:hidden overflow-hidden" ref={emblaRef}>
-           {/* MOBILE ONLY: Navigation Arrows */}
-          <div className="absolute -left-4 flex md:hidden w-[110%] z-50 top-[50%] justify-between gap-3 mt-4">
+        {/* Added standard relative container so absolute positioning buttons align properly */}
+        <div className="block md:hidden relative w-full px-2">
+          
+          {/* MOBILE ONLY: Navigation Arrows (Moved OUTSIDE the viewport div) */}
+          <div className="absolute left-0 right-0 flex md:hidden w-full z-50 top-[35%] -translate-y-1/2 justify-between px-1 pointer-events-none">
             <button
               onClick={scrollPrev}
               disabled={prevBtnDisabled}
-              className={`p-2 rounded-full border transition-all ${
+              className={`p-2 rounded-full border transition-all pointer-events-auto ${
                 prevBtnDisabled 
-                  ? "border-gray-150 text-gray-300 bg-gray-50" 
+                  ? "border-gray-150 text-gray-300 bg-gray-50 opacity-50" 
                   : "border-gray-200 text-gray-700 bg-white shadow-sm active:scale-95"
               }`}
               aria-label="Previous slide"
@@ -91,9 +91,9 @@ export default function CategorySection() {
             <button
               onClick={scrollNext}
               disabled={nextBtnDisabled}
-              className={`p-2 rounded-full border transition-all ${
+              className={`p-2 rounded-full border transition-all pointer-events-auto ${
                 nextBtnDisabled 
-                  ? "border-gray-150 text-gray-300 bg-gray-50" 
+                  ? "border-gray-150 text-gray-300 bg-gray-50 opacity-50" 
                   : "border-gray-200 text-gray-700 bg-white shadow-sm active:scale-95"
               }`}
               aria-label="Next slide"
@@ -101,37 +101,42 @@ export default function CategorySection() {
               <HiOutlineArrowRight size={16} strokeWidth={2.5} />
             </button>
           </div>
-          <div className="flex gap-4 pl-1">
-            {categories.map((cat, i) => (
-              <div 
-                key={i} 
-                className="flex-[0_0_65%] min-w-0 bg-white rounded-2xl p-4 flex flex-col items-center gap-3 border border-gray-150 shadow-sm"
-              >
-                {/* Image Wrapper */}
-                <div className="relative border border-gray-100 w-full aspect-square rounded-full shadow-md overflow-hidden bg-white">
-                  <Image
-                    src={cat.image}
-                    alt={cat.name}
-                    fill
-                    className="object-contain p-2"
-                  />
-                </div>
 
-                {/* Category Name */}
-                <p className="text-xs font-medium text-gray-900 text-center leading-snug tracking-wide min-h-[32px] flex items-center justify-center">
-                  {cat.name}
-                </p>
-
-                {/* Mobile Static Button */}
-                <Link 
-                  href={cat.link || "/products"}
-                  className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-gray-500 text-[10px] font-bold uppercase tracking-wider w-full mt-1 bg-gray-50"
+          {/* This is the strict Viewport element required by Embla */}
+          <div className="overflow-hidden w-full" ref={emblaRef}>
+            {/* This is the direct multi-slide container element */}
+            <div className="flex gap-4 pl-1">
+              {categories.map((cat, i) => (
+                <div 
+                  key={i} 
+                  className="flex-[0_0_65%] min-w-0 bg-white rounded-2xl p-4 flex flex-col items-center gap-3 border border-gray-150 shadow-sm mb-2"
                 >
-                  <span>View More</span>
-                  <HiOutlineArrowRight size={12} strokeWidth={3} />
-                </Link>
-              </div>
-            ))}
+                  {/* Image Wrapper */}
+                  <div className="relative border border-gray-100 w-full aspect-square rounded-full max-lg:shadow-none shadow-md overflow-hidden bg-white">
+                    <Image
+                      src={cat.image}
+                      alt={cat.name}
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
+
+                  {/* Category Name */}
+                  <p className="text-xs font-medium text-gray-900 text-center leading-snug tracking-wide min-h-[32px] flex items-center justify-center">
+                    {cat.name}
+                  </p>
+
+                  {/* Mobile Static Button */}
+                  <Link 
+                    href={cat.link || "/products"}
+                    className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-gray-500 text-[10px] font-bold uppercase tracking-wider w-full mt-1 bg-gray-50"
+                  >
+                    <span>View More</span>
+                    <HiOutlineArrowRight size={12} strokeWidth={3} />
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -153,7 +158,7 @@ export default function CategorySection() {
             >
               <div className="bg-white rounded-2xl p-4 flex flex-col items-center gap-3 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
                 
-                <div className="relative border border-gray-100 w-full shadow-md group-hover:-translate-y-1.5 group-hover:border-[#0056B3] group-hover:shadow-[0_12px_32px_-8px_rgba(0,86,179,0.2)] aspect-square rounded-full border transition-colors duration-200 overflow-hidden">
+                <div className="relative border border-gray-100 w-full shadow-md group-hover:-translate-y-1.5 group-hover:border-[#0056B3] group-hover:shadow-[0_12px_32px_-8px_rgba(0,86,179,0.2)] aspect-square rounded-full  border transition-colors duration-200 overflow-hidden">
                   <Image
                     src={cat.image}
                     alt={cat.name}
