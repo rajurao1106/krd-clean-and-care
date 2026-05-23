@@ -57,7 +57,7 @@ const FAQPage = () => {
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-blue-100">
       {/* Header Section */}
-      <header className="relative bg-[#e9f3f8] pt-16 overflow-hidden">
+      <header className="relative bg-[#e9f3f8] pt-16 max-lg:pt-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center">
           <motion.div 
             initial="hidden"
