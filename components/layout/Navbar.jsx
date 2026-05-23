@@ -4,13 +4,21 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Search, Phone, Menu, X } from 'lucide-react';
+import { Search, Phone, Menu, X, CheckCircle } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showQuote, setShowQuote] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [quoteForm, setQuoteForm] = useState({
+    first_name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [formState, setFormState] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+  const [errorMsg, setErrorMsg] = useState('');
   const router = useRouter();
 
   const navLinks = [
@@ -28,6 +36,36 @@ const Navbar = () => {
       setShowSearch(false);
       setSearchQuery('');
     }
+  };
+
+  const handleQuoteChange = (e) => {
+    setQuoteForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleQuoteSubmit = async (e) => {
+    e.preventDefault();
+    setFormState('loading');
+    setErrorMsg('');
+    try {
+      const res = await fetch('https://krd-admin-backend-five.vercel.app/api/admin/enquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...quoteForm, type: 'quote' }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Submission failed');
+      setFormState('success');
+      setQuoteForm({ first_name: '', email: '', phone: '', message: '' });
+    } catch (err) {
+      setErrorMsg(err.message);
+      setFormState('error');
+    }
+  };
+
+  const handleCloseQuote = () => {
+    setShowQuote(false);
+    setFormState('idle');
+    setErrorMsg('');
   };
 
   return (
@@ -67,7 +105,7 @@ const Navbar = () => {
                 <Phone size={18} className="mr-2" />
                 <span className="text-sm font-medium">Phone</span>
               </a>
-              <button 
+              <button
                 onClick={() => setShowQuote(true)}
                 className="bg-[#0056B3] text-white px-5 py-2.5 rounded-md text-sm font-semibold hover:bg-blue-700 transition-all"
               >
@@ -95,7 +133,7 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <button 
+            <button
               onClick={() => { setShowQuote(true); setIsOpen(false); }}
               className="w-full bg-[#0056B3] text-white px-4 py-3 rounded-md font-semibold mt-4"
             >
@@ -104,8 +142,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-
-      {/* --- POPUP MODALS --- */}
 
       {/* Search Modal */}
       {showSearch && (
@@ -116,9 +152,9 @@ const Navbar = () => {
             </button>
             <h2 className="text-xl font-bold mb-4">Search Products</h2>
             <form onSubmit={handleSearchSubmit} className="flex gap-2">
-              <input 
-                type="text" 
-                placeholder="Search for categories or products..." 
+              <input
+                type="text"
+                placeholder="Search for categories or products..."
                 className="flex-1 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -134,31 +170,90 @@ const Navbar = () => {
       {showQuote && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
           <div className="bg-white w-full max-w-md rounded-lg shadow-2xl p-8 relative">
-            <button onClick={() => setShowQuote(false)} className="absolute right-4 top-4 text-gray-400 hover:text-black">
+            <button onClick={handleCloseQuote} className="absolute right-4 top-4 text-gray-400 hover:text-black">
               <X size={24} />
             </button>
-            <h2 className="text-2xl font-bold mb-6 text-gray-800">Request a Quote</h2>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                <input type="text" required className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Enter your name" />
+
+            {formState === 'success' ? (
+              <div className="flex flex-col items-center justify-center py-8 text-center">
+                <CheckCircle size={56} className="text-green-500 mb-4" />
+                <h2 className="text-2xl font-bold text-gray-800 mb-2">Request Sent!</h2>
+                <p className="text-gray-500 mb-6">Thank you! We'll get back to you shortly.</p>
+                <button
+                  onClick={handleCloseQuote}
+                  className="bg-[#0056B3] text-white px-8 py-2.5 rounded-md font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  Close
+                </button>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                <input type="email" required className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="email@example.com" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
-                <input type="tel" required className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="+91 00000-00000" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                <textarea rows="4" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="How can we help you?"></textarea>
-              </div>
-              <button type="submit" className="w-full bg-[#0056B3] text-white py-3 rounded-md font-bold hover:bg-blue-700 transition-colors">
-                Send Request
-              </button>
-            </form>
+            ) : (
+              <>
+                <h2 className="text-2xl font-bold mb-6 text-gray-800">Request a Quote</h2>
+                <form onSubmit={handleQuoteSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input
+                      type="text"
+                      name="first_name"
+                      required
+                      value={quoteForm.first_name}
+                      onChange={handleQuoteChange}
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      placeholder="Enter your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={quoteForm.email}
+                      onChange={handleQuoteChange}
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      placeholder="email@example.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={quoteForm.phone}
+                      onChange={handleQuoteChange}
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      placeholder="+91 00000-00000"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                    <textarea
+                      name="message"
+                      rows="4"
+                      required
+                      value={quoteForm.message}
+                      onChange={handleQuoteChange}
+                      className="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      placeholder="How can we help you?"
+                    />
+                  </div>
+
+                  {formState === 'error' && (
+                    <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md px-3 py-2">
+                      {errorMsg}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={formState === 'loading'}
+                    className="w-full bg-[#0056B3] text-white py-3 rounded-md font-bold hover:bg-blue-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {formState === 'loading' ? 'Sending...' : 'Send Request'}
+                  </button>
+                </form>
+              </>
+            )}
           </div>
         </div>
       )}
