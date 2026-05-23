@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Factory, Home, Building2, Leaf } from 'lucide-react';
-import about2 from "@/public/about/about2.jpg"
+import about2 from "@/public/about/about4.jpg"
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
