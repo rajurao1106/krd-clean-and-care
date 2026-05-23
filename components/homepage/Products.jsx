@@ -269,9 +269,9 @@ const Products = () => {
                           <h3 className="text-lg font-bold text-gray-900">
                             {product.title}
                           </h3>
-                          <p className="text-sm font-medium text-[#0056B3] mt-1">
+                          {/* <p className="text-sm font-medium text-[#0056B3] mt-1">
                             ₹{product.price}
-                          </p>
+                          </p> */}
                         </div>
                       </motion.div>
                     </div>
