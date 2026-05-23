@@ -190,9 +190,9 @@ export default function CategorySection() {
                     <p className="text-xs font-medium text-gray-900 leading-snug tracking-wide">
                       {cat.name}
                     </p>
-                    <span className="text-[10px] text-gray-400 font-normal mt-0.5">
+                    {/* <span className="text-[10px] text-gray-400 font-normal mt-0.5">
                       ({cat.count} {cat.count === 1 ? "product" : "products"})
-                    </span>
+                    </span> */}
                   </div>
 
                   {/* Mobile View Button */}
