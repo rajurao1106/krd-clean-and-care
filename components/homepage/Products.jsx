@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://krd-admin-backend-five.vercel.app";
 
 // Map API category names → display filter labels
 const CATEGORY_MAP = {

@@ -50,7 +50,7 @@ export default function CategorySection() {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const response = await fetch("http://localhost:3000/api/admin/products?limit=100&page=1");
+        const response = await fetch("https://krd-admin-backend-five.vercel.app/api/admin/products?limit=100&page=1");
         if (!response.ok) throw new Error("Network response was not ok");
         
         const data = await response.json();
