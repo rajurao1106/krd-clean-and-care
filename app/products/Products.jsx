@@ -83,7 +83,6 @@ const ProductPage = () => {
 
   return (
     <div className="bg-gray-50/50 min-h-screen pt-20 font-sans selection:bg-blue-500 selection:text-white">
-   
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Modern Stats Banner */}
@@ -125,7 +124,7 @@ const ProductPage = () => {
                     onClick={() => setActiveCategory(cat)}
                     className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all text-left text-sm font-semibold ${
                       activeCategory === cat
-                        ? "bg-blue-600 text-white shadow-md shadow-blue-100"
+                        ? "bg-[#0056B3] text-white shadow-md shadow-blue-100"
                         : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                     }`}
                   >
@@ -214,7 +213,7 @@ const ProductPage = () => {
                         {/* View Action Button */}
                         <Link
                           href={`/products/${product.id}`}
-                          className="w-full mt-auto bg-gray-900 text-white text-center py-3 rounded-xl font-semibold text-xs tracking-wider uppercase group-hover:bg-blue-600 transition-colors shadow-xs"
+                          className="w-full mt-auto bg-[#0056B3] text-white text-center py-3 rounded-xl font-semibold text-xs tracking-wider uppercase group-hover:bg-[#0056B3] transition-colors shadow-xs"
                         >
                           View Details
                         </Link>
@@ -239,7 +238,7 @@ const ProductPage = () => {
                         onClick={() => setCurrentPage(pg)}
                         className={`w-10 h-10 rounded-xl text-xs font-bold transition-all ${
                           currentPage === pg
-                            ? "bg-blue-600 text-white shadow-md shadow-blue-100"
+                            ? "bg-[#0056B3] text-white shadow-md shadow-blue-100"
                             : "border border-gray-200 text-gray-600 hover:bg-gray-100"
                         }`}
                       >
