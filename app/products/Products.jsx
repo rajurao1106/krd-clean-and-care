@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://krd-admin-backend-five.vercel.app";
 
 const ProductPage = () => {
   const [allProducts, setAllProducts] = useState([]); // Master copy for flawless filtering

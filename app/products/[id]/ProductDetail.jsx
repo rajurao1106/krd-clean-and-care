@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://krd-admin-backend-five.vercel.app";
 
 export default function ProductDetail() {
   const params = useParams();
