@@ -7,34 +7,32 @@ import { motion, AnimatePresence } from "framer-motion";
 const BASE_URL = "https://krd-admin-backend-five.vercel.app";
 
 const ProductPage = () => {
-  const [allProducts, setAllProducts] = useState([]); // Master copy for flawless filtering
+  const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState(["All"]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [sortOrder, setSortOrder] = useState("default");
-  
+
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9; // Clean 3x3 grid layout
+  const itemsPerPage = 9;
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Single robust fetch for seamless catalog control
   useEffect(() => {
     const loadCatalog = async () => {
       setLoading(true);
       setError(null);
       try {
-        // Fetching 100 items to ensure all categories (Floor, Glass, etc.) are available in memory
         const res = await fetch(`${BASE_URL}/api/admin/products?limit=100&page=1`);
         if (!res.ok) throw new Error("Failed to load catalog server data.");
         const data = await res.json();
-        
-        const productsList = data.products || [];
+
+        // FIX: handle both { products: [] } and direct array responses
+        const productsList = data.products || data || [];
         setAllProducts(productsList);
 
-        // Extract clean unique categories
         const catSet = new Set();
         productsList.forEach((p) => {
           if (p.category_name) catSet.add(p.category_name);
@@ -49,52 +47,55 @@ const ProductPage = () => {
     loadCatalog();
   }, []);
 
-  // Compute filtered & sorted products instantly when dependencies change
   useEffect(() => {
     let result = [...allProducts];
 
-    // 1. Category Filter Fix
     if (activeCategory !== "All") {
       result = result.filter((p) => p.category_name === activeCategory);
     }
 
-    // 2. Premium Client-Side Sorting
     if (sortOrder === "az") {
-      result.sort((a, b) => a.name.localeCompare(b.name));
+      result.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
     } else if (sortOrder === "za") {
-      result.sort((a, b) => b.name.localeCompare(a.name));
+      result.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
     } else if (sortOrder === "lowHigh") {
-      result.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+      result.sort((a, b) => parseFloat(a.price || 0) - parseFloat(b.price || 0));
     } else if (sortOrder === "highLow") {
-      result.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      result.sort((a, b) => parseFloat(b.price || 0) - parseFloat(a.price || 0));
     }
 
     setFilteredProducts(result);
-    setCurrentPage(1); // Reset pagination on filter change
+    setCurrentPage(1);
   }, [activeCategory, sortOrder, allProducts]);
 
-  // Pagination calculation
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedProducts = filteredProducts.slice(startIndex, startIndex + itemsPerPage);
 
-  const getImageUrl = (path) =>
-    path ? (path.startsWith("http") ? path : `${BASE_URL}${path}`) : "https://placehold.co/400x400?text=No+Image";
+  // FIX: safely handle null/undefined path
+  const getImageUrl = (path) => {
+    if (!path) return "https://placehold.co/400x400?text=No+Image";
+    return path.startsWith("http") ? path : `${BASE_URL}${path}`;
+  };
 
   return (
     <div className="bg-gray-50/50 min-h-screen pt-20 font-sans selection:bg-blue-500 selection:text-white">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        {/* Modern Stats Banner */}
+
+        {/* Stats Banner */}
         <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-xs">
           <div>
             <h2 className="text-lg font-bold text-gray-900">Product Catalogue</h2>
             <p className="text-sm text-gray-500 mt-0.5">
-              {loading ? "Discovering collection..." : `Showing ${filteredProducts.length} premium products matching your criteria.`}
+              {loading
+                ? "Discovering collection..."
+                : `Showing ${filteredProducts.length} premium products matching your criteria.`}
             </p>
           </div>
           <div className="flex items-center gap-3 w-full sm:w-auto">
-            <label className="text-xs font-bold text-gray-400 uppercase tracking-wider whitespace-nowrap">Sort Catalog</label>
+            <label className="text-xs font-bold text-gray-400 uppercase tracking-wider whitespace-nowrap">
+              Sort Catalog
+            </label>
             <select
               className="w-full sm:w-56 border border-gray-200 bg-gray-50 px-3 py-2.5 rounded-xl text-sm font-semibold text-gray-700 outline-none focus:border-blue-500 focus:bg-white transition-all cursor-pointer"
               value={sortOrder}
@@ -114,8 +115,12 @@ const ProductPage = () => {
           <aside className="w-full lg:w-64 flex-shrink-0 lg:sticky lg:top-24 z-10">
             <div className="bg-white border border-gray-200 rounded-2xl shadow-xs overflow-hidden">
               <div className="bg-gray-50 border-b border-gray-100 px-5 py-4 flex items-center justify-between">
-                <span className="text-xs font-bold text-gray-900 uppercase tracking-widest">Categories</span>
-                <span className="bg-gray-200/60 text-gray-700 px-2 py-0.5 rounded-md text-[10px] font-bold">{categories.length - 1}</span>
+                <span className="text-xs font-bold text-gray-900 uppercase tracking-widest">
+                  Categories
+                </span>
+                <span className="bg-gray-200/60 text-gray-700 px-2 py-0.5 rounded-md text-[10px] font-bold">
+                  {categories.length - 1}
+                </span>
               </div>
               <div className="p-2 space-y-1">
                 {categories.map((cat) => (
@@ -130,7 +135,10 @@ const ProductPage = () => {
                   >
                     <span>{cat}</span>
                     {activeCategory === cat && (
-                      <motion.span layoutId="activeIndicator" className="w-1.5 h-1.5 bg-white rounded-full" />
+                      <motion.span
+                        layoutId="activeIndicator"
+                        className="w-1.5 h-1.5 bg-white rounded-full"
+                      />
                     )}
                   </button>
                 ))}
@@ -138,7 +146,7 @@ const ProductPage = () => {
             </div>
           </aside>
 
-          {/* Right Main Product Listing Area */}
+          {/* Main Product Listing Area */}
           <main className="flex-1 w-full">
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 mb-6 font-medium text-sm">
@@ -147,10 +155,12 @@ const ProductPage = () => {
             )}
 
             {loading ? (
-              /* High fidelity Shimmer skeleton loading grid */
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {Array.from({ length: 6 }).map((_, i) => (
-                  <div key={i} className="border border-gray-200 rounded-2xl p-4 bg-white animate-pulse">
+                  <div
+                    key={i}
+                    className="border border-gray-200 rounded-2xl p-4 bg-white animate-pulse"
+                  >
                     <div className="aspect-square w-full mb-4 bg-gray-100 rounded-xl" />
                     <div className="h-4 bg-gray-100 rounded w-1/3 mb-2" />
                     <div className="h-5 bg-gray-100 rounded w-3/4 mb-4" />
@@ -159,13 +169,21 @@ const ProductPage = () => {
                 ))}
               </div>
             ) : paginatedProducts.length === 0 ? (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-24 bg-white border border-gray-200 rounded-2xl">
-                <p className="text-gray-400 font-medium text-base">No active products found in this category.</p>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-24 bg-white border border-gray-200 rounded-2xl"
+              >
+                <p className="text-gray-400 font-medium text-base">
+                  No active products found in this category.
+                </p>
               </motion.div>
             ) : (
               <>
-                {/* Clean Responsive Product Grid */}
-                <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <motion.div
+                  layout
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
                   <AnimatePresence mode="popLayout">
                     {paginatedProducts.map((product) => (
                       <motion.div
@@ -177,12 +195,16 @@ const ProductPage = () => {
                         transition={{ duration: 0.35, ease: "easeInOut" }}
                         className="bg-white border border-gray-200/80 rounded-2xl p-4 flex flex-col group hover:border-blue-500 hover:shadow-xl hover:shadow-gray-100/70 transition-all duration-300 relative overflow-hidden"
                       >
-                        {/* Interactive Image Box */}
+                        {/* Image Box */}
                         <div className="aspect-square w-full mb-4 flex items-center justify-center rounded-xl overflow-hidden bg-gray-50 group-hover:bg-white transition-colors relative border border-gray-100">
                           <img
                             src={getImageUrl(product.featured_image)}
-                            alt={product.name}
+                            alt={product.name || "Product"}
                             className="max-h-full object-contain p-6 transform group-hover:scale-105 transition-transform duration-500 ease-out"
+                            onError={(e) => {
+                              e.target.src =
+                                "https://placehold.co/400x400?text=No+Image";
+                            }}
                           />
                         </div>
 
@@ -198,10 +220,10 @@ const ProductPage = () => {
                           {product.name}
                         </h3>
 
-                        {/* Price metrics */}
+                        {/* Price */}
                         <div className="flex items-baseline gap-2 mb-5 mt-1">
                           <span className="text-base font-black text-gray-900">
-                            ₹{parseFloat(product.price).toFixed(2)}
+                            ₹{parseFloat(product.price || 0).toFixed(2)}
                           </span>
                           {product.old_price && (
                             <span className="text-xs text-gray-400 line-through font-medium">
@@ -210,10 +232,10 @@ const ProductPage = () => {
                           )}
                         </div>
 
-                        {/* View Action Button */}
+                        {/* View Details Button */}
                         <Link
                           href={`/products/${product.id}`}
-                          className="w-full mt-auto bg-[#0056B3] text-white text-center py-3 rounded-xl font-semibold text-xs tracking-wider uppercase group-hover:bg-[#0056B3] transition-colors shadow-xs"
+                          className="w-full mt-auto bg-[#0056B3] text-white text-center py-3 rounded-xl font-semibold text-xs tracking-wider uppercase hover:bg-blue-700 transition-colors shadow-xs"
                         >
                           View Details
                         </Link>
@@ -222,7 +244,7 @@ const ProductPage = () => {
                   </AnimatePresence>
                 </motion.div>
 
-                {/* Professional Pagination Module */}
+                {/* Pagination */}
                 {totalPages > 1 && (
                   <div className="flex items-center justify-center gap-2 mt-12 border-t border-gray-200 pt-6">
                     <button
