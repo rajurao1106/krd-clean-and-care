@@ -1,10 +1,8 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import Slider from "react-slick";
+import React, { useState, useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 import { products } from "@/data/products";
 import Link from "next/link";
@@ -12,7 +10,6 @@ import { motion } from "framer-motion";
 
 const Products = () => {
   const [activeCategory, setActiveCategory] = useState("All");
-  const sliderRef = useRef(null);
 
   const categories = [
     "All",
@@ -29,84 +26,65 @@ const Products = () => {
       ? products
       : products.filter((p) => p.category === activeCategory);
 
-  const settings = {
-    dots: true, // Enables dots on mobile for better spatial navigation UX
-    arrows: false,
-    infinite: filteredProducts.length > 3,
-    speed: 500,
-    slidesToShow: Math.min(3, filteredProducts.length),
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: filteredProducts.length > 3,
+    align: "start",
     slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: Math.min(2, filteredProducts.length),
-          infinite: filteredProducts.length > 2,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          infinite: filteredProducts.length > 1,
-          dots: true,
-        },
-      },
-    ],
-  };
+  });
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
   };
 
   return (
-    <section className="py-12 px-4 sm:px-6 max-w-7xl mx-auto font-sans overflow-hidden">
+    <section className="py-12 px-4 sm:px-6 max-w-7xl mx-auto font-sans">
       {/* Header */}
-      <motion.div 
+      <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-        className="flex font-[Lato] flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8"
+        className="flex font-[Lato] max-lg:flex-col justify-between items-end max-lg:items-start max-lg:gap-4 mb-8"
       >
         <div>
           <motion.div variants={fadeInUpVariants} className="flex justify-start items-center">
-            <p className="bg-blue-50 text-[#0056B3] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-2">
+            <p className="text-center bg-blue-50 text-[#0056B3] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-2">
               Our Products
             </p>
           </motion.div>
-          <motion.h2 variants={fadeInUpVariants} className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mt-1 leading-tight">
+          <motion.h2 variants={fadeInUpVariants} className="text-4xl sm:text-5xl font-bold text-gray-900 mt-1">
             Our <span className="text-[#0056B3]">Best Sellers</span> Products
           </motion.h2>
         </div>
-        <motion.div variants={fadeInUpVariants} className="w-full md:w-auto">
+        <motion.div variants={fadeInUpVariants}>
           <Link
             href={"/products"}
-            className="bg-[#0056B3] text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-red-500 transition block text-center w-full md:w-auto"
+            className="bg-[#0056B3] text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-red-500 transition block text-center w-full sm:w-auto"
           >
             View All Products
           </Link>
         </motion.div>
       </motion.div>
 
-      {/* ✅ Category Tabs (Touch scroll friendly) */}
-      <motion.div 
+      {/* Category Tabs */}
+      <motion.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.2, duration: 0.5 }}
-        className="flex gap-2 overflow-x-auto pb-4 mb-4 no-scrollbar -mx-4 px-4 scrollbar-none"
-        style={{ WebkitOverflowScrolling: "touch" }}
+        className="flex gap-3 overflow-x-auto pb-4 px-1 no-scrollbar mb-6"
       >
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-2 rounded-full border text-xs sm:text-sm whitespace-nowrap transition-all duration-200 ${
+            className={`px-5 py-2 rounded-full border text-sm whitespace-nowrap transition ${
               activeCategory === cat
-                ? "bg-[#0056B3] text-white border-[#0056B3] shadow-sm"
+                ? "bg-[#0056B3] text-white border-[#0056B3]"
                 : "bg-white text-gray-600 border-gray-200 hover:border-[#0056B3]"
             }`}
           >
@@ -115,59 +93,64 @@ const Products = () => {
         ))}
       </motion.div>
 
-      {/* Carousel Wrapper */}
-      <motion.div 
+      {/* Embla Carousel */}
+      <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.3, duration: 0.6 }}
-        className="relative px-1 sm:px-0"
+        className="relative"
       >
-        {/* Prev Button - Hidden on mobile devices, functional on desktop */}
+        {/* Prev Button */}
         <button
-          onClick={() => sliderRef.current?.slickPrev()}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md hidden md:flex items-center justify-center text-gray-600 hover:bg-[#0056B3] hover:text-white hover:border-[#0056B3] transition"
-          aria-label="Previous slide"
+          onClick={scrollPrev}
+          className="absolute left-0 top-1/2 -translate-y-1/2 translate-x-1 sm:-translate-x-4 z-10 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:bg-[#0056B3] hover:text-white hover:border-[#0056B3] transition"
         >
           <ChevronLeft size={20} />
         </button>
 
-        {/* Next Button - Hidden on mobile devices, functional on desktop */}
+        {/* Next Button */}
         <button
-          onClick={() => sliderRef.current?.slickNext()}
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md hidden md:flex items-center justify-center text-gray-600 hover:bg-[#0056B3] hover:text-white hover:border-[#0056B3] transition"
-          aria-label="Next slide"
+          onClick={scrollNext}
+          className="absolute right-0 top-1/2 -translate-y-1/2 -translate-x-1 sm:translate-x-4 z-10 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-600 hover:bg-[#0056B3] hover:text-white hover:border-[#0056B3] transition"
         >
           <ChevronRight size={20} />
         </button>
 
-        <Slider ref={sliderRef} {...settings} className="product-slider pb-8">
-          {filteredProducts.map((product) => (
-            <div key={product.id} className="px-2 sm:px-3">
-              <motion.div layout className="group relative">
-                <div
-                  className="relative aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm"
-                  style={{ backgroundColor: product.color }}
-                >
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="mt-3 sm:mt-4 px-1">
-                  <div className="text-xs sm:text-sm text-gray-400 mb-0.5">
-                    <span>{product.category}</span>
+        {/* Embla Viewport */}
+        <div ref={emblaRef} className="overflow-hidden px-2">
+          <div className="flex">
+            {filteredProducts.map((product) => (
+              <div
+                key={product.id}
+                // ✅ Responsive slide width via Tailwind:
+                // mobile: 1 card, sm: 2 cards, lg: 3 cards
+                className="flex-none w-full sm:w-1/2 lg:w-1/3 px-2 sm:px-3"
+              >
+                <motion.div layout className="group relative">
+                  <div
+                    className="relative aspect-[4/5] rounded-3xl overflow-hidden"
+                    style={{ backgroundColor: product.color }}
+                  >
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-gray-900 line-clamp-1">
-                    {product.title}
-                  </h3>
-                </div>
-              </motion.div>
-            </div>
-          ))}
-        </Slider>
+                  <div className="mt-4">
+                    <div className="text-sm text-gray-400 mb-1">
+                      <span>{product.category}</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900">
+                      {product.title}
+                    </h3>
+                  </div>
+                </motion.div>
+              </div>
+            ))}
+          </div>
+        </div>
       </motion.div>
     </section>
   );
