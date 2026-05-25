@@ -1,10 +1,29 @@
 "use client";
 
-import React from 'react';
-import { MapPin, Phone, Truck, Globe, Send } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MapPin, Phone, Truck, Globe, Send, Mail, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Contact = () => {
+  const [settings, setSettings] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/admin/settings');
+        const data = await response.json();
+        setSettings(data.settings);
+      } catch (error) {
+        console.error("Error fetching site settings:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSettings();
+  }, []);
+
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 25 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
@@ -14,6 +33,17 @@ const Contact = () => {
     hidden: { opacity: 0, x: 30 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="animate-pulse flex flex-col items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-blue-100 border-2 border-t-[#0056B3] animate-spin" />
+          <p className="text-gray-400 font-medium">Loading details...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen max-lg:pt-14 bg-white font-sans">
@@ -29,7 +59,9 @@ const Contact = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
             Let&apos;s Start a <span className="text-[#0056B3]">Conversation</span>
           </h2>
-          <p className="text-gray-500 mt-4 text-lg">Have questions about our manufacturing process or bulk supplies?</p>
+          <p className="text-gray-500 mt-4 text-lg">
+            Have questions about our manufacturing process or bulk supplies with {settings?.site_name || "us"}?
+          </p>
         </motion.div>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -85,32 +117,65 @@ const Contact = () => {
                 Reach Us <span className="text-[#0056B3]">Directly</span>
               </h3>
               
-              <div className="space-y-10">
-                <div className="flex gap-5">
-                  <div className="bg-blue-50 h-15 p-4 rounded-2xl text-[#0056B3]">
-                    <MapPin size={26} />
+              <div className="space-y-8">
+                {settings?.site_address && (
+                  <div className="flex gap-5">
+                    <div className="bg-blue-50 h-14 w-14 flex items-center justify-center rounded-2xl text-[#0056B3] shrink-0">
+                      <MapPin size={26} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-slate-900">Our Location</h4>
+                      <p className="text-slate-600 leading-relaxed mt-1 whitespace-pre-line">
+                        {settings.site_address}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg text-slate-900">Our Location</h4>
-                    <p className="text-slate-600 leading-relaxed mt-1">
-                      Industrial Area Amaseoni, Khasra No. 232/1 Part, <br />
-                      Raipur, Chhattisgarh, 492001, India
-                    </p>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex gap-5">
-                  <div className="bg-blue-50 p-4 rounded-2xl text-[#0056B3]">
-                    <Phone size={26} />
+                {settings?.site_phone && (
+                  <div className="flex gap-5">
+                    <div className="bg-blue-50 h-14 w-14 flex items-center justify-center rounded-2xl text-[#0056B3] shrink-0">
+                      <Phone size={26} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-slate-900">Call Us</h4>
+                      <p className="text-slate-600 text-xl font-medium mt-1">
+                        {settings.site_phone}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg text-slate-900">Call Us</h4>
-                    <p className="text-slate-600 text-xl font-medium mt-1">+91 80489 66524</p>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex gap-5">
-                  <div className="bg-blue-50 p-4 rounded-2xl text-[#0056B3]">
+                {settings?.site_email && (
+                  <div className="flex gap-5">
+                    <div className="bg-blue-50 h-14 w-14 flex items-center justify-center rounded-2xl text-[#0056B3] shrink-0">
+                      <Mail size={26} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-slate-900">Email Us</h4>
+                      <a href={`mailto:${settings.site_email}`} className="text-[#0056B3] hover:underline text-lg font-medium mt-1 block">
+                        {settings.site_email}
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {settings?.working_hours && (
+                  <div className="flex gap-5">
+                    <div className="bg-blue-50 h-14 w-14 flex items-center justify-center rounded-2xl text-[#0056B3] shrink-0">
+                      <Clock size={26} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-slate-900">Working Hours</h4>
+                      <p className="text-slate-600 font-medium mt-1">
+                        {settings.working_hours}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* <div className="flex gap-5">
+                  <div className="bg-blue-50 h-14 w-14 flex items-center justify-center rounded-2xl text-[#0056B3] shrink-0">
                     <Globe size={26} />
                   </div>
                   <div>
@@ -124,7 +189,7 @@ const Contact = () => {
                       indiamart.com/krdcleancare
                     </a>
                   </div>
-                </div>
+                </div> */}
               </div>
             </motion.div>
 
@@ -137,13 +202,13 @@ const Contact = () => {
               className="bg-[#0056B3] text-white p-8 rounded-3xl flex flex-col md:flex-row items-center gap-6 relative overflow-hidden group"
             >
               <Truck size={60} className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform" />
-              <div className="bg-white/10 p-4 rounded-full">
+              <div className="bg-white/10 p-4 rounded-full shrink-0">
                 <Truck size={32} />
               </div>
               <div className="text-center md:text-left">
                 <h4 className="font-bold text-xl mb-1">Looking for Bulk Orders?</h4>
                 <p className="text-blue-100 opacity-90 text-sm">
-                  Get specialized B2B pricing and custom manufacturing solutions.
+                  Get specialized B2B pricing and custom manufacturing solutions from {settings?.site_name || "us"}.
                 </p>
               </div>
             </motion.div>
@@ -152,21 +217,23 @@ const Contact = () => {
       </section>
 
       {/* Map Section - Full Width with Hover Transition */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        className="w-full h-[450px] relative group overflow-hidden border-t"
-      >
-        <div className="absolute inset-0 bg-slate-900/10 pointer-events-none group-hover:bg-transparent transition-colors duration-500 z-10" />
-        <iframe 
-          title="Location Map"
-          className="w-full h-full grayscale-[50%] group-hover:grayscale-0 transition-all duration-700 ease-in-out"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.544837549117!2d81.7061793!3d21.2498704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a28dd0409f0f9c5%3A0x633b497f6c348555!2sAmaseoni%2C%20Raipur%2C%20Chhattisgarh!5e0!3m2!1sen!2sin!4v1715510000000!5m2!1sen!2sin"
-          loading="lazy"
-        ></iframe>
-      </motion.section>
+      {settings?.google_maps_embed && (
+        <motion.section 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="w-full h-[450px] relative group overflow-hidden border-t"
+        >
+          <div className="absolute inset-0 bg-slate-900/10 pointer-events-none group-hover:bg-transparent transition-colors duration-500 z-10" />
+          <iframe 
+            title="Location Map"
+            className="w-full h-full grayscale-[50%] group-hover:grayscale-0 transition-all duration-700 ease-in-out"
+            src={settings.google_maps_embed}
+            loading="lazy"
+          ></iframe>
+        </motion.section>
+      )}
     </div>
   );
 };
