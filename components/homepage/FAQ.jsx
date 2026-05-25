@@ -88,7 +88,7 @@ export default function FAQSection({ isHomePage = false }) {
         <motion.div 
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-100px" }} 
           variants={{
             visible: { transition: { staggerChildren: 0.08 } }
           }}
