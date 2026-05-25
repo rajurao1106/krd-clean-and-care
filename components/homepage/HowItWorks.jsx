@@ -49,7 +49,7 @@ const HowItWorks = () => {
         <motion.span variants={fadeInUpVariants} className="uppercase tracking-widest text-sm font-bold opacity-90 block">
           Working Process
         </motion.span>
-        <motion.h2 variants={fadeInUpVariants} className="text-4xl md:text-5xl font-extrabold mt-2 mb-6">
+        <motion.h2 variants={fadeInUpVariants} className="text-4xl font-[lato] md:text-5xl font-bold mt-2 mb-6">
           How It Works
         </motion.h2>
         <motion.p variants={fadeInUpVariants} className="max-w-2xl mx-auto text-lg opacity-90">

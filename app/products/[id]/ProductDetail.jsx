@@ -146,7 +146,7 @@ export default function ProductDetail() {
           </div>
 
           {/* Right Panel: Details */}
-          <div className="p-6 sm:p-10 flex flex-col justify-center bg-white">
+          <div className="p-6 sm:p-10 flex font-[lato] flex-col justify-center bg-white">
             {product.category_name && (
               <span className="bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-md self-start mb-4">
                 {product.category_name}
@@ -178,7 +178,7 @@ export default function ProductDetail() {
                 <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">
                   Product Overview
                 </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-sm font-[poppins] text-gray-600 leading-relaxed">
                   {product.description && product.description !== product.name
                     ? product.description
                     : "Premium grade formulation curated under KRD Clean & Care standards. Engineered for maximum deep-cleaning execution with zero surface decay footprint."}

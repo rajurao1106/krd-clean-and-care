@@ -14,10 +14,10 @@ import useEmblaCarousel from "embla-carousel-react";
 
 // Static mapping structure to match backend database slugs with your local images
 const categoryImageMap = {
-  "glass-&-surface": product1,
-  "floor-cleaners": product2,
-  "toilet-care": product3,
-  "milky-perfumed-cleaner": product4,
+  "bathroom-cleaner": product1, // Added to match backend id: 6
+  "glass-&-surface": product2,
+  "floor-cleaners": product3,
+  "toilet-care": product4,
   "dish-wash-gel": product5,
 };
 
@@ -46,48 +46,31 @@ export default function CategorySection() {
     setNextBtnDisabled(!api.canScrollNext());
   }, []);
 
-  // Fetch and group products by category from your API
+  // Fetch categories directly from your API
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const response = await fetch("https://krd-admin-backend-five.vercel.app/api/admin/products?limit=100&page=1");
+        const response = await fetch("https://krd-admin-backend-five.vercel.app/api/admin/categories");
         if (!response.ok) throw new Error("Network response was not ok");
         
         const data = await response.json();
-        const productsList = data.products || [];
+        const rawCategories = data.categories || [];
 
-        // Track, group, and count occurrences of categories
-        const categoryMap = {};
-
-        productsList.forEach((product) => {
-          // Fallback values if a product happens to not have a category assigned
-          const slug = product.category_slug || "uncategorized";
-          const name = product.category_name || "Uncategorized";
-
-          if (!categoryMap[slug]) {
-            categoryMap[slug] = { name, slug, count: 0 };
-          }
-          categoryMap[slug].count += 1;
-        });
-
-        // Convert the object maps back into an array tailored for rendering
-        const parsedCategories = Object.values(categoryMap).map((item) => {
-          // If a new category is made in the backend without a local image asset, default safely to product1
-          const matchedImage = categoryImageMap[item.slug] || product1; 
+        // Correctly maps the backend categories directly into UI-ready elements
+        const parsedCategories = rawCategories.map((cat) => {
+          // Fallback safely to product1 if a backend slug doesn't match local images
+          const matchedImage = categoryImageMap[cat.slug] || product1; 
           
           return {
-            name: item.name,
-            slug: item.slug,
+            name: cat.name,
+            slug: cat.slug,
             image: matchedImage,
-            link: `/products?category=${item.slug}`,
-            count: item.count,
+            link: `/products?category=${cat.slug}`,
+            count: cat.product_count || 0, // Maps directly to backend product_count
           };
         });
 
-        // Filter out any uncategorized items if you don't want them showing up as a collection block
-        const finalCategories = parsedCategories.filter(cat => cat.slug !== "uncategorized");
-
-        setCategories(finalCategories);
+        setCategories(parsedCategories);
       } catch (error) {
         console.error("Error loading category data payload:", error);
       } finally {
@@ -190,9 +173,6 @@ export default function CategorySection() {
                     <p className="text-xs font-medium text-gray-900 leading-snug tracking-wide">
                       {cat.name}
                     </p>
-                    {/* <span className="text-[10px] text-gray-400 font-normal mt-0.5">
-                      ({cat.count} {cat.count === 1 ? "product" : "products"})
-                    </span> */}
                   </div>
 
                   {/* Mobile View Button */}
@@ -240,9 +220,6 @@ export default function CategorySection() {
                   <p className="text-sm font-medium text-gray-900 leading-snug tracking-wide">
                     {cat.name}
                   </p>
-                  {/* <p className="text-xs text-gray-400 group-hover:text-[#0056B3] transition-colors mt-0.5">
-                    {cat.count} {cat.count === 1 ? "Item" : "Items"}
-                  </p> */}
                 </div>
 
                 <Link 

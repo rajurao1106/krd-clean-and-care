@@ -65,11 +65,11 @@ const FAQPage = () => {
             variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
             className="md:w-1/2 z-10"
           >
-            <motion.h1 variants={fadeInUpVariants} className="text-5xl md:text-6xl font-bold text-slate-900 leading-tight">
+            <motion.h1 variants={fadeInUpVariants} className="text-5xl font-[poppins] md:text-6xl font-bold text-slate-900 leading-tight">
               Frequently Asked <br />
               <span className="text-[#0056B3]">Questions!</span>
             </motion.h1>
-            <motion.p variants={fadeInUpVariants} className="mt-6 text-gray-600 text-lg max-w-md leading-relaxed">
+            <motion.p variants={fadeInUpVariants} className="mt-6 font-[poppins] text-gray-600 text-lg max-w-md leading-relaxed">
               Find quick solutions to common queries about our herbal products, industrial supply, and corporate services.
             </motion.p>
           </motion.div>

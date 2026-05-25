@@ -9,12 +9,13 @@ import defaultLogo from "@/public/navbar/logo.png";
 
 export default function Footer() {
   const [settings, setSettings] = useState(null);
+  const [portfolioLinks, setPortfolioLinks] = useState(null)
 
   useEffect(() => {
     const fetchSettings = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/admin/settings",
+          "https://krd-admin-backend-five.vercel.app/api/admin/settings",
         );
         const data = await response.json();
         setSettings(data.settings);
@@ -23,16 +24,29 @@ export default function Footer() {
       }
     };
 
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(
+          "https://krd-admin-backend-five.vercel.app/api/admin/categories",
+        );
+        const data = await response.json();
+        setPortfolioLinks(data.categories);
+      } catch (error) {
+        console.error("Error fetching footer configurations:", error);
+      }
+    };
+
     fetchSettings();
+    fetchCategories()
   }, []);
 
-  const portfolioLinks = [
-    "Glass & Multisurface Cleaner",
-    "Milky Herbal Floor Cleaner",
-    "Toilet Cleaner",
-    "Milky Perfumed Cleaner",
-    "Dish Wash Gel",
-  ];
+  // const portfolioLinks = [
+  //   "Glass & Multisurface Cleaner",
+  //   "Milky Herbal Floor Cleaner",
+  //   "Toilet Cleaner",
+  //   "Milky Perfumed Cleaner",
+  //   "Dish Wash Gel",
+  // ];
 
   const quickLinks = [
     { name: "Home", href: "/" },
@@ -101,25 +115,30 @@ export default function Footer() {
           {/* Column 2: Products */}
           <div className="space-y-6">
             <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-white">
-              Our Products
+              Our Categories
             </h3>
             <ul className="space-y-4">
-              {portfolioLinks.map((link) => (
-                <li
-                  key={link}
-                  className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-all cursor-pointer group"
-                >
-                  <span className="w-2 h-[2px] bg-blue-500 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
-                  {link}
-                </li>
-              ))}
+              {portfolioLinks?.map((link, index) => {
+                const href = link.url || `/category/${(link.slug || link.name || "").toString().trim().toLowerCase().replace(/\s+/g, "-")}`;
+                return (
+                  <li
+                    key={link.id ?? index}
+                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-all cursor-pointer group"
+                  >
+                    <Link href={href} className="flex items-center gap-2 w-full">
+                      <span className="w-2 h-[2px] bg-blue-500 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
+                      {link.name}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
           {/* Column 3: Quick Links */}
           <div className="space-y-6">
             <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-white">
-              Navigation
+              Quick Links
             </h3>
             <ul className="space-y-4">
               {quickLinks.map((link) => (
